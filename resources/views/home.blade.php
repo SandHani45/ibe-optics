@@ -21,7 +21,7 @@
           <div class="row mt-5">
             <div class="col-sm-5 col-md-5 col-lg-5 self-center offset-md-1">
               <div class="title-left text-center">
-                <h2><a href="{{ route('smartfinder-plus') }}" class="font-weight-normal box-home highlite">SMARTFINDER PLUS</a></h2>
+                <h2><a href="{{URL::asset('smartfinder-plus')}}" class="font-weight-normal box-home highlite">SMARTFINDER PLUS</a></h2>
               </div>
             </div>
             <span class="boder-left"></span>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\categorie;
 use App\manufacturer;
 use Illuminate\Http\Request;
-
+use Alert;
 class AddCatogorieController extends Controller
 {
     public function addCategorie(Request $request)
@@ -28,9 +28,16 @@ class AddCatogorieController extends Controller
 	}
 	public function GetData(Request $request, $id)
 	{
-		$manufactures = manufacturer::with('categories')
-									->where('categorie_id',$id)
+	
+		$manufactures = categorie::with('manufactures')
+									->Orwhere('id',$id)
 									->get();
+		if( empty($manufactures)){
+			$categorie = categorie::find($id);
+			return $categorie;
+		}
+		
 		return $manufactures;
+
 	}
 }

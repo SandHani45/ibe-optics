@@ -15,7 +15,7 @@
         <div class="text-center width bg-coffie pd-top-fix">
          <h5><a  class=" text-unset white">ADD CAMERA</a></h5>
          <div class="back">
-             <a href="smartfinder-pro.html" class="btn btn-f btn-red radius-50 white">Back</a>
+             <a href="{{URL::asset('smartfinder-plus')}}" class="btn btn-f btn-red radius-50 white">Back</a>
          </div>
         </div>
     </section>
@@ -297,9 +297,9 @@
                                         <td>
                                             <select class="form-control border-td-0 dyn-input" onchange="showDiv4(this)" id="s_value" name="s_value[1]">
                                                 <option value="">Choose Categorie</option>
-                                                @foreach($sensors as $sensor)
-                                                <option value="{{$sensor->value}}">{{$sensor->value}}</option>
-                                                @endforeach
+                                               
+                                               
+                                                
                                             </select>
                                         </td>
                                         <td>
@@ -383,7 +383,7 @@
             </div>
              <!-- WIDTH, HEIGHT & DIAMETER                   -->
             <div class="tab mb-2" id="selectShowManuFour">
-                <div class="add_hide">
+                <div class="add_hide" id="add_hideFive">
                     <div class="row bg-top">
                         <div class="col-md-12">
                             <div class="bg-top ">
@@ -395,7 +395,7 @@
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-3 ">
-                                    <p id="sensorResult_2" class="ml-3"></p> 
+                                    <p id="sensorResult_2" class="ml-3 font-weight-bold"></p> 
                                                                                   
                                 </div>
                                 <div class="col-md-3">
@@ -431,7 +431,7 @@
                         </div> 
                     </div>
                 </div>
-                <div class="add_show">
+                <div class="add_show" id="show_hideFive">
                     <div class="row bg-top">
                         <div class="col-md-12">
                             <div class="row bg-top">
@@ -441,12 +441,35 @@
                         </div>
                     </div>
                     <div class="row bg-f2 padding">
-                        <div class="col-md-8">
+                            <div class="col-md-8">
                             <div class="row">
-                                    <div class="col-md-4 ml-3">
-                                        <p  class="font-weight-bold" id="sensorValueResult" ></p>
-                                    </div>
-                            </div>
+                                <div class="col-md-3 ">
+                                    <p id="sensorValueResult" class="ml-3 font-weight-bold"></p> 
+                                                                                  
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                        <p class="col-md-6" id="sensorWidthResult"></p>
+                                           
+                                        <div class="col-md-2"><p class="">mm</p></div> 
+                                    </div>  
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                            <p class="col-md-6" id="sensorHeightResult"></p>
+                                        <div class="col-md-2"><p class="">mm</p></div> 
+                                    </div>  
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-md-2"> </div>
+                                           <p class="col-md-6" id="sensorDaimeterResult"></p>
+                                        <div class="col-md-2"></div> 
+                                    </div>  
+                                </div>
+                            </div> 
                         </div>                 
                     </div>
 
@@ -493,7 +516,7 @@
                     <div class="col-md-6 ml-5 add_block">
                         <div style="overflow:auto;">
                             <div style="float:right;">
-                                <button type="button"  
+                                <button type="button" id="reviewData" 
                                     class="btn btn-f btn-red font-40 radius-50 float-right" 
                                     data-toggle="modal"
                                     data-target="#review" 
@@ -538,16 +561,16 @@
                                                 <div class="col-md-7">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <p id="sensorValueFinalResult">2.11</p>
+                                                            <p id="reviewValue">2.11</p>
                                                         </div>
                                                         <div class="col">
-                                                            <p id="sensorWidthResult"> W 54.12 mm</p>   
+                                                            <p id="reviewWidht"> W 54.12 mm</p>   
                                                         </div>
                                                         <div class="col">
-                                                            <p id="sensorHeightResult">H 25.58 mm</p>
+                                                            <p id="reviewHeight">H 25.58 mm</p>
                                                         </div>
                                                         <div class="col">
-                                                            <p id="sensorDiameterResult">D 59.86</p>
+                                                            <p id="reviewDiameter">D 59.86</p>
                                                         </div>
                                                     </div>   
                                                 </div>
@@ -575,7 +598,7 @@
                                     </div>
                                     <div class="modal-footer" style=" justify-content: center;">
                                         <button type="button" class="btn btn-red float-right radius-50 add-another "  data-dismiss="modal">Edit</button>
-                                        <button type="submit"  class="btn btn-red float-right radius-50 add-another"  >SUBMIT</button>
+                                        <button type="submit"  class="btn btn-red float-right radius-50 add-another"  onClick="window.location.reload()" >SUBMIT</button>
                                     </div>
                                     </div>
                                 </div>
@@ -630,8 +653,10 @@
        if(select.value !== ' '){
             document.getElementById('selectShowManuFour').style.display = "block";
             document.getElementById('saveHideFour').style.display = "none";
-             document.getElementById("add_hideFour").style.display = "none";
-            document.getElementById("show_hideFour").style.display = "block";
+            document.getElementById("add_hideFour").style.display = "none";
+            document.getElementById("show_hideFour").style.display = "block"; 
+            // document.getElementById("add_hideFive").style.display = "none";
+            // document.getElementById("show_hideFive").style.display = "block";
        } 
     } 
 </script>
@@ -642,6 +667,8 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+
+
     //categorie
     var categorieId = 0;
     $('document').ready(function(){
@@ -682,6 +709,7 @@
 // get id data
 var manufacturer_data = '';
 var manufacturer_id = 0;
+var name = null;
 $('document').ready(function(){
     $("#categorie").change(function() {
         var categorie_id = $(this).val();
@@ -692,17 +720,17 @@ $('document').ready(function(){
             success: function(data){
                 console.log(data);
                 manufacturer_data = data.name;
-                categorieId = data[0].categorie_id;
-                console.log(data[0].categories.name);
+                console.log(categorieId);
+                categorieId = data[0].id;
                 var len = data.length;
-                document.getElementById('categorie_result').innerHTML=data[0].categories.name;
-                //document.getElementById('editCategory').innerHTML=data[0].categories.name;
-                document.getElementById("editCategory").value = data[0].categories.name;
+                document.getElementById('categorie_result').innerHTML=data[0].name;
+                document.getElementById("editCategory").value = data[0].name;
                //$("#manufacturer").empty();
                 for( var i = 0; i<len; i++){
                     var id = data[i]['id'];
                     var name = data[i]['name'];
-                    $("#manufacturer").append("<option value='"+id+"'>"+name+"</option>");
+                    var manufactures = data[i]['manufactures'];
+                    $("#manufacturer").append("<option value='"+id+"'>"+manufactures[0].name+"</option>");
                 }    
             }
         });
@@ -765,17 +793,22 @@ $('document').ready(function(){
             success: function(data){
                 console.log(data);
                 camera_data = data.name;
-                manufacturerId = data[0].manufacturer_id;
-                console.log(data[0].manufacturers.name);
+                manufacturerId = data[0].id;
+                // console.log(data[0].manufacturers.name);
                 var len = data.length;
-                document.getElementById('manufacturerResult').innerHTML=data[0].manufacturers.name;
-                //document.getElementById('editCategory').innerHTML=data[0].categories.name;
-                document.getElementById("editManufacturer").value = data[0].manufacturers.name;
+                document.getElementById('manufacturerResult').innerHTML=data[0].name;
+
+                document.getElementById("editManufacturer").value = data[0].name;
                //$("#manufacturer").empty();
                 for( var i = 0; i<len; i++){
                     var id = data[i]['id'];
                     var name = data[i]['name'];
-                    $("#model").append("<option value='"+id+"'>"+name+"</option>");
+                    var cameras = data[i]['cameras'];
+                    for (j = 0; j<cameras.length; j++){
+                        var name = cameras[j]['name'];
+                        var id = cameras[j]['id'];
+                        $("#model").append("<option value='"+id+"'>"+name+"</option>");
+                    }
                 }    
             }
         });
@@ -840,17 +873,24 @@ $('document').ready(function(){
             success: function(data){
                 console.log(data);
                 sensor_data = data.name;
-                cameraId = data[0].camera_id;
-                console.log(data[0].cameras.name);
+                cameraId = data[0].id;
+                console.log(data[0].name);
                     
-                document.getElementById('modelResult').innerHTML=data[0].cameras.name;
+                document.getElementById('modelResult').innerHTML=data[0].name;
                 //document.getElementById('editCategory').innerHTML=data[0].categories.name;
-                document.getElementById("editCamera").value = data[0].cameras.name;
+                document.getElementById("editCamera").value = data[0].name;
+                var len = data.length;
                //$("#manufacturer").empty();
                 for( var i = 0; i<len; i++){
                     var id = data[i]['id'];
                     var name = data[i]['name'];
-                    $("#model").append("<option value='"+id+"'>"+name+"</option>");
+                    var sensors = data[i]['sensors']
+                    for( var j = 0; j<sensors.length; j++){
+                        var id = sensors[j]['id'];
+                        var value = sensors[j]['value'];
+                        $("#s_value").append("<option value='"+id+"'>"+value+"</option>");
+                    }
+                   
                 }    
             }
         });
@@ -876,7 +916,23 @@ $('document').ready(function(){
                 manufacturerId = data.manufacturer_id;
                 cameraId = data.camera_id;
                 sensorId = data.id;
-
+                document.getElementById('sensorResult_2').innerHTML=data.value;
+                document.getElementById('sensorResult').innerHTML=data.value;
+                document.getElementById('sensorValueResult').innerHTML=data.value;
+                document.getElementById('sensorWidthResult').innerHTML=data.width;
+                document.getElementById('sensorHeightResult').innerHTML=data.height;
+                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
+                document.getElementById('width').value=data.width;
+                document.getElementById('height').value=data.height;
+                document.getElementById('diameter').value=data.diameter;
+                document.getElementById("editSensor").value = data.value;
+                document.getElementById("editwidth").value = data.width;
+                document.getElementById("editheight").value = data.height;
+                document.getElementById("editdiameter").value = data.diameter;
+                document.getElementById('reviewValue').innerHTML=data.value;
+                document.getElementById('reviewWidht').innerHTML=data.width;
+                document.getElementById('reviewHeight').innerHTML=data.height;
+                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
            }
         });
     });
@@ -898,10 +954,83 @@ $('document').ready(function(){
                 manufacturerId = data.manufacturer_id;
                 cameraId = data.camera_id;
                 sensorId = data.id;
+    
+                document.getElementById('sensorResult_2').innerHTML=data.value;
+                document.getElementById('sensorResult').innerHTML=data.value;
+                document.getElementById('sensorValueResult').innerHTML=data.value;
+                document.getElementById('sensorWidthResult').innerHTML=data.width;
+                document.getElementById('sensorHeightResult').innerHTML=data.height;
+                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
+                document.getElementById('width').value=data.width;
+                document.getElementById('height').value=data.height;
+                document.getElementById('diameter').value=data.diameter;
+                document.getElementById("editSensor").value = data.value;
+                document.getElementById("editwidth").value = data.width;
+                document.getElementById("editheight").value = data.height;
+                document.getElementById("editdiameter").value = data.diameter;
+                document.getElementById('reviewValue').innerHTML=data.value;
+                document.getElementById('reviewWidht').innerHTML=data.width;
+                document.getElementById('reviewHeight').innerHTML=data.height;
+                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
            }
         });
     });
 });
+
+
+// get id sensor
+var width_data = '';
+var width_id = 0;
+$('document').ready(function(){
+    $("#s_value").change(function() {
+        var sensor_id = $(this).val();
+        $.ajax({
+            url:"/get-sensor/" + sensor_id,
+            method: "post",
+            data: {sensor_id:sensor_id},
+            success: function(data){
+                console.log(data);
+                width_data = data.name;
+                // cameraId = data[0].id;
+                // console.log(data[0].name);
+                  sensorId = data.id;
+                  console.log(data.value) ;  
+                document.getElementById('sensorResult_2').innerHTML=data.value;
+                document.getElementById('sensorResult').innerHTML=data.value;
+                document.getElementById('sensorValueResult').innerHTML=data.value;
+                document.getElementById('sensorWidthResult').innerHTML=data.width;
+                document.getElementById('sensorHeightResult').innerHTML=data.height;
+                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
+                document.getElementById('width').value=data.width;
+                document.getElementById('height').value=data.height;
+                document.getElementById('diameter').value=data.diameter;
+                document.getElementById("editSensor").value = data.value;
+                document.getElementById("editwidth").value = data.width;
+                document.getElementById("editheight").value = data.height;
+                document.getElementById("editdiameter").value = data.diameter;
+                document.getElementById('reviewValue').innerHTML=data.value;
+                document.getElementById('reviewWidht').innerHTML=data.width;
+                document.getElementById('reviewHeight').innerHTML=data.height;
+                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
+
+                var len = data.length;
+               //$("#manufacturer").empty();
+                for( var i = 0; i<len; i++){
+                    var id = data[i]['id'];
+                    var name = data[i]['name'];
+                    var sensors = data[i]['sensors']
+                    for( var j = 0; j<sensors.length; j++){
+                        var id = data[j]['id'];
+                        var name = data[j]['name'];
+                        $("#model").append("<option value='"+id+"'>"+name+"</option>");
+                    }
+                   
+                }    
+            }
+        });
+    });
+});
+
 
 //width,hight
 $('document').ready(function(){
@@ -919,6 +1048,25 @@ $('document').ready(function(){
                 success:function(data){
                     console.log(data);
                     sensorId = data.id;
+                    var categorie_id = data.categorie_id
+                document.getElementById('sensorResult_2').innerHTML=data.value;
+                document.getElementById('sensorResult').innerHTML=data.value;
+                document.getElementById('sensorValueResult').innerHTML=data.value;
+                document.getElementById('sensorWidthResult').innerHTML=data.width;
+                document.getElementById('sensorHeightResult').innerHTML=data.height;
+                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
+                document.getElementById('width').value=data.width;
+                document.getElementById('height').value=data.height;
+                document.getElementById('diameter').value=data.diameter;
+                document.getElementById("editSensor").value = data.value;
+                document.getElementById("editwidth").value = data.width;
+                document.getElementById("editheight").value = data.height;
+                document.getElementById("editdiameter").value = data.diameter;
+                document.getElementById('reviewValue').innerHTML=data.value;
+                document.getElementById('reviewWidht').innerHTML=data.width;
+                document.getElementById('reviewHeight').innerHTML=data.height;
+                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
+                
                }
             });
         });
@@ -937,11 +1085,46 @@ $('document').ready(function(){
                data : "width=" + width + "&_token= "+ token + "&height=" + height + "&diameter=" + diameter,
                url:"/add-sensor-value/" + sensor_id,
                 success:function(data){
-                    console.log(data);
+                console.log(data);
+                var categorie_id = data.categorie_id
+                document.getElementById('sensorResult_2').innerHTML=data.value;
+                document.getElementById('sensorResult').innerHTML=data.value;
+                document.getElementById('sensorValueResult').innerHTML=data.value;
+                document.getElementById('sensorWidthResult').innerHTML=data.width;
+                document.getElementById('sensorHeightResult').innerHTML=data.height;
+                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
+                document.getElementById('width').value=data.width;
+                document.getElementById('height').value=data.height;
+                document.getElementById('diameter').value=data.diameter;
+                document.getElementById("editSensor").value = data.value;
+                document.getElementById("editwidth").value = data.width;
+                document.getElementById("editheight").value = data.height;
+                document.getElementById("editdiameter").value = data.diameter;
+                document.getElementById('reviewValue').innerHTML=data.value;
+                document.getElementById('reviewWidht').innerHTML=data.width;
+                document.getElementById('reviewHeight').innerHTML=data.height;
+                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
                }
             });
         });
     });
+
+
+
+// $('document').ready(function(){
+//         $('#reviewData').click(function(){
+//             var categorie_id = categorie_id;
+//             $.ajax({
+//                type : "post",
+//                data : {categorie_id:categorie_id},
+//                url:"/camera-review/" + categorie_id,
+//                 success:function(data){
+//                     console.log(data);
+             
+//                }
+//             });
+//         });
+//     });
 </script>
 
 <script>
@@ -1135,18 +1318,18 @@ $('document').ready(function(){
             var sensorResult = s_value + ' ' + s_v_type;
             var sensorResult2 =  ''+ s_v_type2;
             var sensorResult3 =  ' ' + s_v_type3;
-            document.getElementById('sensorResult').textContent = sensorResult;
-            document.getElementById('sensorResult2').textContent = sensorResult2;
-            document.getElementById('sensorResult3').textContent = sensorResult3;
+            //document.getElementById('sensorResult').textContent = sensorResult;
+            // document.getElementById('sensorResult2').textContent = sensorResult2;
+            // document.getElementById('sensorResult3').textContent = sensorResult3;
 
-            document.getElementById('sensorResult_2').textContent = sensorResult;
+            // document.getElementById('sensorResult_2').textContent = sensorResult;
             document.getElementById('sensorValueFinalResult').textContent = sensorResult;
             document.getElementById('editSensor').value = sensorResult;
             $("#editSensor").change(function(){
                 var editSensor = document.getElementById("editSensor").value;
                 document.getElementById('s_v_type').value = editSensor;
-               document.getElementById('sensorResult').textContent = editSensor;
-                document.getElementById('sensorResult_2').textContent = editSensor;
+               //document.getElementById('sensorResult').textContent = editSensor;
+                // document.getElementById('sensorResult_2').textContent = editSensor;
                 document.getElementById('sensorValueFinalResult').textContent = editSensor;
 
                //document.getElementById('editCategory').value = editCategory;
@@ -1156,30 +1339,31 @@ $('document').ready(function(){
 
         // step-5
         $(document).ready(function(){
-            var width = document.getElementById("width").value;
-            var height = document.getElementById("height").value;
-            var diameter = document.getElementById("diameter").value;  
-            document.getElementById('editwidth').value = width;       
-            document.getElementById('editheight').value = height;       
-            document.getElementById('editdiameter').value = diameter;
+            // var categorie = document.getElementById("categorie").value;
+            // $('input[name="s_value2"]').val();
+            // var camera = document.getElementById("model").value;
+            // document.getElementById('editwidth').value = width;       
+            // document.getElementById('editheight').value = height;       
+            // document.getElementById('editdiameter').value = diameter;
 
-            var sensorValueResult = 'W' + width+ 'mm' + '   ' +'H'+ height+ 'mm' + ' '+'D'+ diameter;
-            document.getElementById('sensorValueResult').textContent = sensorValueResult;
-             document.getElementById('sensorWidthResult').textContent = width;
-             document.getElementById('sensorHeightResult').textContent = height;
-             document.getElementById('sensorDiameterResult').textContent = diameter;
+            //var sensorValueResult = 'W' + width+ 'mm' + '   ' +'H'+ height+ 'mm' + ' '+'D'+ diameter;
+            // document.getElementById('categorieFinalResult').textContent = categorie;
+            // document.getElementById('cameraFinalResult').textContent = camera;
+             // document.getElementById('sensorWidthResult').textContent = width;
+             // document.getElementById('sensorHeightResult').textContent = height;
+             // document.getElementById('sensorDiameterResult').textContent = diameter;
              $("#editwidth,#editheight,#editdiameter").change(function(){
-                var editwidth = document.getElementById("editwidth").value;
-                 var editheight = document.getElementById("editheight").value;
-                 var editdiameter = document.getElementById("editdiameter").value;
-                document.getElementById('width').value = editwidth;
-                 document.getElementById('height').value = editheight;
-                 document.getElementById('diameter').value = editdiameter;
+                // var editwidth = document.getElementById("editwidth").value;
+                //  var editheight = document.getElementById("editheight").value;
+                //  var editdiameter = document.getElementById("editdiameter").value;
+                // document.getElementById('width').value = editwidth;
+                //  document.getElementById('height').value = editheight;
+                //  document.getElementById('diameter').value = editdiameter;
                 var sensorValueResult = 'W' + editwidth+ 'mm' + '   ' +'H'+ editheight+ 'mm' + ' '+'D'+ editdiameter;
-                document.getElementById('sensorValueResult').textContent = sensorValueResult;
-                 document.getElementById('sensorWidthResult').textContent = editwidth;
-                document.getElementById('sensorHeightResult').textContent = editheight;
-                document.getElementById('sensorDiameterResult').textContent = editdiameter;
+                // document.getElementById('sensorValueResult').textContent = sensorValueResult;
+                //  document.getElementById('sensorWidthResult').textContent = editwidth;
+                // document.getElementById('sensorHeightResult').textContent = editheight;
+                // document.getElementById('sensorDiameterResult').textContent = editdiameter;
 
                
             });

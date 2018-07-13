@@ -27,9 +27,14 @@ class ManufacturerController extends Controller
 			
 	public function GetData(Request $request, $id)
 	{
-		$camera = camera::with('manufacturers')
-						->where('manufacturer_id',$id)
+		$camera = manufacturer::with('cameras')
+						->Orwhere('id',$id)
 						->get();
+
+		if( empty($camera)){
+			$manufacturer = manufacturer::find($id);
+			return $manufacturer;
+		}
 		return $camera;
 	} 
    

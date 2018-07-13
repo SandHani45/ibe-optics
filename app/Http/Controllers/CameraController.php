@@ -28,9 +28,14 @@ class CameraController extends Controller
 
 	public function GetData(Request $request, $id)
 	{
-		$sensor = Sensor::with('cameras')
-						->where('camera_id',$id)
+		$sensor = camera::with('sensors')
+						->Orwhere('id',$id)
 						->get();
+
+		if( empty($sensor)){
+			$camera = camera::find($id);
+			return $camera;
+		}
 		return $sensor;
 	} 
 

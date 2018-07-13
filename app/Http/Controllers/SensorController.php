@@ -20,6 +20,7 @@ class SensorController extends Controller
 	    	$sensor->save();
 	    	return $sensor;
         }
+        return $sensor_validate;
 
 	}
 
@@ -50,4 +51,20 @@ class SensorController extends Controller
 	    $sensor->update();
 	    return $sensor;
 	}
+
+	public function GetData(Request $request, $id)
+	{
+		$sensor = Sensor::find($id);
+		if( empty($sensor)){
+			$sensor = Sensor::find($id);
+			return $sensor;
+		}
+		return $sensor;
+	}
+
+	public function Review(Request $request, $id){
+		$review = Sensor::with('categories')
+						->get();
+		return $review;							
+	} 
 }

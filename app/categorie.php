@@ -8,8 +8,9 @@ class categorie extends Model
 {
 	protected $table = 'categories';
 
-    public function manufacturers()
+    public function manufactures()
     {
-    	return $this->hasMany('App\manufacturer');
-    } 
+    	return $this->hasMany('App\manufacturer','categorie_id');
+    }
+
 }

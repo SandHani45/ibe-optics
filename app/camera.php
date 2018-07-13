@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class camera extends Model
 {
+	protected $table = 'cameras';
+
     public function manufacturers(){
 
-    	return $this->belongsTo('App\manufacturer','manufacturer_id');
+    	return $this->belongsToMany('App\manufacturer','manufacturer_id');
     }
 
     public function sensors()
