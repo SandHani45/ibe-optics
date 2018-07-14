@@ -37,5 +37,17 @@ class ManufacturerController extends Controller
 		}
 		return $camera;
 	} 
+	public function GetLensData(Request $request, $id)
+	{
+		$series = manufacturer::with('series')
+						->Orwhere('id',$id)
+						->get();
+
+		if( empty($series)){
+			$manufacturer = manufacturer::find($id);
+			return $manufacturer;
+		}
+		return $series;
+	} 
    
 }

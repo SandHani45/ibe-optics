@@ -12,9 +12,14 @@ class manufacturer extends Model
 
     	return $this->belongsToMany('App\categorie','categorie_id');
     }
-
+    
     public function cameras()
     {
     	return $this->hasMany('App\camera');
+    } 
+    
+    public function series()
+    {
+    	return $this->hasMany('App\series');
     }
 }

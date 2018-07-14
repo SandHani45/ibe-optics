@@ -10,11 +10,11 @@ class SmartFinderPlusController extends Controller
 {
    public function index()
    {
-   	$alldatas = DB::table('Sensors')
-   				->join('categories','Sensors.categorie_id', '=','categories.id')
-   				->join('manufacturers','Sensors.manufacturer_id', '=','manufacturers.id')
-   				->join('cameras','Sensors.camera_id', '=','cameras.id')
-   				->select('categories.name as categorieName', 'manufacturers.name as manufacturerName','cameras.name as cameraName','Sensors.id','Sensors.value','Sensors.width','Sensors.height','Sensors.diameter')
+   	$alldatas = DB::table('sensors')
+   				->join('categories','sensors.categorie_id', '=','categories.id')
+   				->join('manufacturers','sensors.manufacturer_id', '=','manufacturers.id')
+   				->join('cameras','sensors.camera_id', '=','cameras.id')
+   				->select('categories.name as categorieName', 'manufacturers.name as manufacturerName','cameras.name as cameraName','sensors.id','sensors.value','sensors.width','sensors.height','sensors.diameter')
    				->get();   
    	return view('pages.smartfinder-plus',compact('alldatas'));
    }
@@ -22,15 +22,14 @@ class SmartFinderPlusController extends Controller
    public function getTableEditData(Request $request, $id)
    {
 
-        $alldatas = DB::table('Sensors')
-                    ->join('categories','Sensors.categorie_id', '=','categories.id')
-                    ->join('manufacturers','Sensors.manufacturer_id', '=','manufacturers.id')
-                    ->join('cameras','Sensors.camera_id', '=','cameras.id')
-                    ->select('categories.name as categorieName', 'manufacturers.name as manufacturerName','cameras.name as cameraName','Sensors.id','Sensors.value','Sensors.width','Sensors.height','Sensors.diameter')
-                    ->where('Sensors.id', $id)
+        $alldatas = DB::table('sensors')
+                    ->join('categories','sensors.categorie_id', '=','categories.id')
+                    ->join('manufacturers','sensors.manufacturer_id', '=','manufacturers.id')
+                    ->join('cameras','sensors.camera_id', '=','cameras.id')
+                    ->select('categories.name as categorieName', 'manufacturers.name as manufacturerName','cameras.name as cameraName','sensors.id','sensors.value','sensors.width','sensors.height','sensors.diameter')
+                    ->where('sensors.id', $id)
                     ->get();  
                
-
             return $alldatas;
    }
 

@@ -22,7 +22,7 @@ Route::get('/smartfinder-pro', 'SmartFinderProController@index')->name('smartfin
 Route::resource('/smartfinder-plus', 'SmartFinderPlusController');
 
 Route::post('/smartfinder-plus-edit/{id}', 'SmartFinderPlusController@getTableEditData')->name('smartfinder-plus-edit');
-
+// ADD CAMERA ROUTES
 Route::resource('/add-camera', 'AddCameraController');
 Route::resource('/add-lens', 'AddLensController');
 Route::post('/add-categorie', 'AddCatogorieController@addCategorie')->name('add-categorie');
@@ -44,3 +44,12 @@ Route::post('/add-sensor-value/{id}', 'SensorController@EditWidth')->name('add-s
 Route::post('/get-sensor/{id}', 'SensorController@GetData')->name('get-sensor');
 
 Route::post('/camera-review/{id}', 'SensorController@Review')->name('camera-review');
+
+// LENS ROUTES
+Route::post('/get-lens-manufacturer/{id}', 'ManufacturerController@GetLensData')->name('get-lens-manufacturer');
+
+Route::post('/add-series-name', 'SeriesController@addSeries')->name('add-series-name');
+Route::post('/add-series-name/{id}', 'SeriesController@Edit')->name('add-series-name');
+Route::post('/get-series/{id}', 'SeriesController@GetData')->name('get-series');
+
+// Route::post('/get-focal/{id}', 'SensorController@getFocalData')->name('get-focal');

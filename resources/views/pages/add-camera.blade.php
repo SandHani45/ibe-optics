@@ -57,7 +57,7 @@
                         <div class="col-md-3 ml-3 add_block">   
                             <div style="overflow:auto;">
                                 <div id="saveHide" style="float:right;">
-                                    <button type="submit" id="setpOne" class="btn btn-f btn-red font-40 radius-50" onclick="nextPrev(1)">Save</button>
+                                    <button type="submit" id="setpOne" class="btn btn-f btn-red font-40 radius-50">Save</button>
                                 </div>
                             </div> 
                         </div> 
@@ -143,7 +143,7 @@
                         <div class="col-md-3 ml-3 add_block">
                             <div style="overflow:auto;">
                                 <div id="saveHideTwo" style="float:right;">
-                                    <button type="button" id="sendManufacturer" class="btn btn-f btn-red font-40 radius-50" onclick="nextPrev(1)">Save</button>
+                                    <button type="button" id="sendManufacturer" class="btn btn-f btn-red font-40 radius-50" >Save</button>
                                 </div>
                             </div>     
                         </div>   
@@ -320,7 +320,7 @@
                         <div class="col-md-3 ml-3 add_block">
                             <div style="overflow:auto;">
                                 <div id="saveHideFour" style="float:right;">
-                                    <button type="button" id="sendSensor" class="btn btn-f btn-red font-40 radius-50" onclick="nextPrev(1)" >Save</button>
+                                    <button type="button" id="sendSensor" class="btn btn-f btn-red font-40 radius-50"  >Save</button>
                                 </div>
                             </div>     
                         </div> 
@@ -425,7 +425,7 @@
                         <div class="col-md-3 ml-3 add_block">
                             <div style="overflow:auto;">
                                 <div style="float:right;">
-                                    <button type="button"  class="btn btn-f btn-red font-40 radius-50" id="sendWidth" onclick="nextPrev(1)" >Save</button>
+                                    <button type="button"  class="btn btn-f btn-red font-40 radius-50" id="sendWidth"  >Save</button>
                                 </div>
                             </div>     
                         </div> 
@@ -509,7 +509,7 @@
                     </div>
                 </div>                  
             </div>
-            <div class="tab" id="selectShowManuFour">    
+            <div class="tab" id="selectShowManuReview">    
                 <div class="row bg-top">
                 </div>
                 <div class="row bg-f2 padding ">             
@@ -623,6 +623,18 @@
 @endsection
 
 @section('script')
+{{-- <script type="text/javascript">
+
+$('#setpOne').click(function(){
+    var validation_categorie = $('#c_type').val();
+
+   if(validation_categorie == ''){
+    alert ('please filed the data');
+   }
+});
+
+
+</script> --}}
 <script type="text/javascript">
     function showDiv(select){
        if(select.value !== ' '){
@@ -657,6 +669,7 @@
             document.getElementById("show_hideFour").style.display = "block"; 
             // document.getElementById("add_hideFive").style.display = "none";
             // document.getElementById("show_hideFive").style.display = "block";
+
        } 
     } 
 </script>
@@ -675,6 +688,14 @@
         $('#setpOne').click(function(){
             var c_type = $("#c_type").val();
             var token  = $("#token").val();
+            if(c_type == ''){
+                alert ('please fill the required fields');
+                return;
+            }
+            document.getElementById('selectShowManu').style.display = "block";
+            document.getElementById('saveHide').style.display = "none";
+            document.getElementById("add_hideOne").style.display = "none";
+            document.getElementById("show_hideOne").style.display = "block";
             $.ajax({
                type : "POST",
                data : "c_type=" + c_type + "&_token= "+ token,
@@ -683,6 +704,7 @@
                     console.log(data);
                     categorieId = data.id;
                     document.getElementById('categorie_result').innerHTML=data.name;
+                    document.getElementById('editCategory').value = data.name;
                }
             });
         });
@@ -701,12 +723,13 @@
                         console.log(data);
                         categorieId = data.id;
                         document.getElementById('categorie_result').innerHTML=data.name;
+                        document.getElementById('editCategory').innerHTML=data.name;
                    }
                 });
             });
         });
 
-// get id data
+// get id categorie data
 var manufacturer_data = '';
 var manufacturer_id = 0;
 var name = null;
@@ -744,8 +767,15 @@ $('document').ready(function(){
         $('#sendManufacturer').click(function(){
             var manufacturer = $("#m_type").val();
             var token  = $("#token").val();
-            var categorie_id  = categorieId
-        
+            var categorie_id  = categorieId;
+            if(manufacturer == ''){
+                alert ('please fill the required fields');
+                return;
+            }
+            document.getElementById('selectShowManuTwo').style.display = "block";
+            document.getElementById('saveHideTwo').style.display = "none";
+            document.getElementById("add_hideTwo").style.display = "none";
+            document.getElementById("show_hideTwo").style.display = "block";
             $.ajax({
                type : "POST",
                data : "manufacturer=" + manufacturer + "&_token= "+ token + "&categorie_id=" + categorie_id,
@@ -755,6 +785,7 @@ $('document').ready(function(){
                     categorieId = data.categorie_id;
                     manufacturerId = data.id;
                     document.getElementById('manufacturerResult').innerHTML=data.name;
+                    document.getElementById('editManufacturer').value=data.name;
                }
             });
         });
@@ -823,6 +854,14 @@ $('document').ready(function(){
             var cameraname = $("#mo_type").val();
             var token  = $("#token").val();
             var categorie_id  = categorieId;
+            if(cameraname == ''){
+                alert ('please fill the required fields');
+                return;
+            }
+            document.getElementById('selectShowManuThree').style.display = "block";
+            document.getElementById('saveHideThree').style.display = "none";
+            document.getElementById("add_hideThree").style.display = "none";
+            document.getElementById("show_hideThree").style.display = "block";
             $.ajax({
                type : "POST",
                data : "cameraname=" + cameraname + "&_token= "+ token + "&categorie_id=" + categorie_id + "&manufacturerId=" + manufacturerId,
@@ -906,6 +945,14 @@ $('document').ready(function(){
         var token  = $("#token").val();
         var categorie_id  = categorieId;
         var camera_id = cameraId;
+        if(value == ''){
+            alert ('please fill the required fields');
+            return;
+        }
+        document.getElementById('selectShowManuFour').style.display = "block";
+        document.getElementById('saveHideFour').style.display = "none";
+        document.getElementById("add_hideFour").style.display = "none";
+        document.getElementById("show_hideFour").style.display = "block"; 
         $.ajax({
            type : "POST",
            data : "value=" + value + "&_token= "+ token + "&categorie_id=" + categorie_id + "&manufacturerId=" + manufacturerId + "&camera_id=" + camera_id,
@@ -954,7 +1001,6 @@ $('document').ready(function(){
                 manufacturerId = data.manufacturer_id;
                 cameraId = data.camera_id;
                 sensorId = data.id;
-    
                 document.getElementById('sensorResult_2').innerHTML=data.value;
                 document.getElementById('sensorResult').innerHTML=data.value;
                 document.getElementById('sensorValueResult').innerHTML=data.value;
@@ -1041,9 +1087,18 @@ $('document').ready(function(){
             var categorie_id  = categorieId;
             var camera_id = cameraId;
             var sensor_id = sensorId;
+             if(width == '' || height == '' || diameter == ''){
+            alert ('please fill the required fields');
+            return;
+            }
+            document.getElementById("selectShowManuFour").style.display = "block";
+            document.getElementById("add_hideFive").style.display = "none";
+            document.getElementById("show_hideFive").style.display = "block";
+            document.getElementById("selectShowManuReview").style.display = "block";
+            
             $.ajax({
                type : "PUT",
-               data : "width=" + width + "&_token= "+ token + "&categorie_id=" + categorie_id + "&manufacturerId=" + manufacturerId + "&camera_id=" + camera_id +"&sensor_id=" + sensor_id + "&height=" + height + "&diameter=" + diameter,
+               data : "width=" + width + "&_token= "+ token + "&height=" + height + "&diameter=" + diameter,
                url:"/add-sensor/" + sensor_id,
                 success:function(data){
                     console.log(data);
