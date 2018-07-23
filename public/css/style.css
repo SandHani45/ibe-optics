@@ -73,6 +73,15 @@ a{
     width: 50%
 
 }
+.width-100{
+
+}
+.length{
+    width: 94px;
+    /* height: 30px; */
+    top: -5px;
+    position: relative;
+}
 .right{
    width: 50% 
 }
@@ -280,7 +289,9 @@ table.dataTable {
     color:#7080be;
 }
 .inside{
-    border-bottom: 7px solid #f2f2f2!important;
+    border-bottom: 7px solid #ececec!important;
+    background: #ececec!important;
+    margin-left: 31px;
    
 }
 .pd-04{
@@ -519,4 +530,10 @@ table.dataTable thead .sorting_desc {
 }
 .pt-4, .py-4 {
     padding-top: 0.4em!important;
+}
+.input-ajust input{
+      width: 81px;
+}
+.width-50{
+  width: 50%;
 }

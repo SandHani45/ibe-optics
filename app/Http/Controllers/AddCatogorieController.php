@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use Alert;
 class AddCatogorieController extends Controller
 {
+	 public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function addCategorie(Request $request)
     {
     	$categorie_verify = categorie::where('name', $request->c_type)

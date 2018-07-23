@@ -13,4 +13,13 @@ class categorie extends Model
     	return $this->hasMany('App\manufacturer','categorie_id');
     }
 
+     public function focalLengths()
+    {
+    	return $this->hasMany('App\focalLength');
+    } 
+    public function camera()
+    {
+    	return $this->hasMany('App\camera','categorie_id');
+    }
+
 }

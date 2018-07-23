@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
+	 public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
        public function addSeries(Request $request)
     {
     	$series = new series;

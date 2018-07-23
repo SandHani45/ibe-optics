@@ -8,13 +8,18 @@ class camera extends Model
 {
 	protected $table = 'cameras';
 
-    public function manufacturers(){
-
-    	return $this->belongsToMany('App\manufacturer','manufacturer_id');
+    public function categories()
+    {
+        return $this->belongsTo('App\categorie','id');
+    } 
+    public function manufacturers()
+    {
+        return $this->belongsTo('App\manufacturer','id');
     }
 
     public function sensors()
     {
-    	return $this->hasMany('App\Sensor');
+    	return $this->hasMany('App\Sensor','camera_id');
     }
+
 }

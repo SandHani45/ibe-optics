@@ -2,76 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Sensor;
+use App\camera;
+use App\categorie;
+use App\focalLength;
+use App\manufacturer;
+use App\series;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Sensor;
-use App\manufacture;
 class SmartFinderPlusController extends Controller
 {
-   public function index()
-   {
-   	$alldatas = DB::table('sensors')
-   				->join('categories','sensors.categorie_id', '=','categories.id')
-   				->join('manufacturers','sensors.manufacturer_id', '=','manufacturers.id')
-   				->join('cameras','sensors.camera_id', '=','cameras.id')
-   				->select('categories.name as categorieName', 'manufacturers.name as manufacturerName','cameras.name as cameraName','sensors.id','sensors.value','sensors.width','sensors.height','sensors.diameter')
-   				->get();   
-   	return view('pages.smartfinder-plus',compact('alldatas'));
-   }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-   public function getTableEditData(Request $request, $id)
-   {
+    public function index()
+    {
+        $camera_datas = camera::with('categories','manufacturers','sensors')->get();
+        //return $camera_datas;
+        $lensdatas = series::with('focalLengths','manufactures')->get();
+       	return view('pages.smartfinder-plus',compact('lensdatas','camera_datas'));
+    }
 
-        $alldatas = DB::table('sensors')
-                    ->join('categories','sensors.categorie_id', '=','categories.id')
-                    ->join('manufacturers','sensors.manufacturer_id', '=','manufacturers.id')
-                    ->join('cameras','sensors.camera_id', '=','cameras.id')
-                    ->select('categories.name as categorieName', 'manufacturers.name as manufacturerName','cameras.name as cameraName','sensors.id','sensors.value','sensors.width','sensors.height','sensors.diameter')
-                    ->where('sensors.id', $id)
-                    ->get();  
+    public function getTableEditData($id)
+    {
+
+        $alldatas =  $camera_datas = camera::with('categories','manufacturers','sensors')
+                                            ->where('id',$id) 
+                                            ->get();
                
             return $alldatas;
-   }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
+    public function getLensData(){
+         $lensDatas = series::with('focalLengths','manufactures')->get();
+         return  $lensDatas;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function update($id)
     {
         $alldatas = DB::table('Sensors')
@@ -82,6 +50,15 @@ class SmartFinderPlusController extends Controller
                 ->get();
         return  $alldatas;        
     }
+
+
+    public function getLensTableEdit($id){
+         $lensDatas = series::with('focalLengths','manufactures')
+                               ->where('id',$id) 
+                               ->get();
+         return  $lensDatas;
+    }
+
 
     /**
      * Remove the specified resource from storage.

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ManufacturerController extends Controller
 {
+	 public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
    public function addManufacturer(Request $request)
 	{
 		$manufacturer = new manufacturer;
@@ -25,7 +30,7 @@ class ManufacturerController extends Controller
 		return $manufacturer;
 	}		
 			
-	public function GetData(Request $request, $id)
+	public function GetData($id)
 	{
 		$camera = manufacturer::with('cameras')
 						->Orwhere('id',$id)

@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class series extends Model
 {
-   	public function manufacturers(){
-
-    	return $this->belongsToMany('App\manufacturer','manufacturer_id');
-    }
-
-    public function focalLength()
+  
+    public function focalLengths()
     {
-    	return $this->hasMany('App\focalLength','categorie_id');
+        return $this->hasMany('App\focalLength');
     }
+    public function manufactures()
+    {
+    	return $this->hasMany('App\manufacturer','categorie_id');
+    }  
 
 }

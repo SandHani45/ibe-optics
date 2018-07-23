@@ -196,6 +196,7 @@
                     </div>
                 </div>        
             </div>
+
                 <!-- CAMERA NAME -->
             <div class="tab mb-2" id="selectShowManuTwo">
                 <div class="add_hide" id="add_hideThree">
@@ -295,7 +296,7 @@
                                 <tbody class="dynamic" id="pda-details">
                                     <tr>
                                         <td>
-                                            <select class="form-control border-td-0 dyn-input" onchange="showDiv4(this)" id="s_value" name="s_value[1]">
+                                            <select class="form-control border-td-0 dyn-input" onchange="showDiv4(this)" id="s_value[1]" name="s_value">
                                                 <option value="">Choose Categorie</option>
                                                
                                                
@@ -306,7 +307,7 @@
                                               <label class="or"> OR </label>
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control border-td-0 dyn-input" id="s_v_type" name="s_v_type[1]" placeholder="Type new sensor">
+                                            <input type="number" class="form-control border-td-0 dyn-input" id="s_v_type[1]" name="s_v_type" placeholder="Type new sensor">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -331,26 +332,13 @@
                         <div class="col-md-12">
                             <div class="row bg-top">
                                 <p class="heade-title ml-3 col-md-8"> SENSOR MODE</p>
-                                <p class="title-edit col-md-3"><a  class="float-right edit-color"  class="float-right edit-color " data-toggle="modal" data-target="#sensorModal" data-whatever="@mdo" href="">Edit</a></p> 
+                                <p class="title-edit col-md-3"><a  class="float-right edit-color"  class="float-right edit-color " data-toggle="modal" id="editSensor" data-target="#sensorModal" data-whatever="@mdo" href="">Edit</a></p> 
                             </div>
                         </div>
                     </div>
                     <div class="row bg-f2 padding">
-                        <div class="col-md-8">
-                            <div class="row">
-                                    <div class="col-md-4 ml-3">
-                                        <p  class="font-weight-bold" id="sensorResult" ></p>
-                                        <p  class="font-weight-bold" id="sensorResult2" ></p>
-                                        <p  class="font-weight-bold" id="sensorResult3" ></p>
-                                        <p  class="font-weight-bold" id="sensorResult4" ></p>
-                                        <p  class="font-weight-bold" id="sensorResult5" ></p>
-                                        <p  class="font-weight-bold" id="sensorResult6" ></p>
-                                        <p  class="font-weight-bold" id="sensorResult7" ></p>
-                                        <p  class="font-weight-bold" id="sensorResult8" ></p>
-                                        <p  class="font-weight-bold" id="sensorResult9" ></p>
-                                        <p  class="font-weight-bold" id="sensorResult10" ></p>
-                                    </div>
-                            </div>
+                        <div class="col-md-8" id="sersorMode">
+
                         </div>                 
                     </div>
                      {{-- EDIT MODEL CAMERA --}}
@@ -363,13 +351,9 @@
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <div class="modal-body">
+                              <div class="modal-body" id="editDataShow">
                                 
-                                  <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Sensor Name :</label>
-                                    <input type="hidden" value="{{csrf_token()}}" id="token" />
-                                    <input type="text" class="form-control" name="" id="editSensor">
-                                  </div>
+                                  
                                
                               </div>
                               <div class="modal-footer">
@@ -381,6 +365,7 @@
                     </div>
                 </div>    
             </div>
+
              <!-- WIDTH, HEIGHT & DIAMETER                   -->
             <div class="tab mb-2" id="selectShowManuFour">
                 <div class="add_hide" id="add_hideFive">
@@ -391,36 +376,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row bg-f2 padding ">
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-3 ">
-                                    <p id="sensorResult_2" class="ml-3 font-weight-bold"></p> 
-                                                                                  
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="row">
-                                        <div class="col-md-2"></div>
-                                        <input type="hidden" value="{{csrf_token()}}" id="token" />
-                                            <input type="number" class="form-control border-td-0 col-md-6" id="width" name="width" placeholder="Width" required="">
-                                        <div class="col-md-2"><p class="">mm</p></div> 
-                                    </div>  
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="row">
-                                        <div class="col-md-2"></div>
-                                            <input type="number" class="form-control border-td-0 col-md-6" id="height" name="height" placeholder="Height" required="">
-                                        <div class="col-md-2"><p class="">mm</p></div> 
-                                    </div>  
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="row">
-                                        <div class="col-md-2"> </div>
-                                            <input type="number" class="form-control border-td-0 col-md-6" id="diameter" name="diameter"  placeholder="Diameter" required="">
-                                        <div class="col-md-2"></div> 
-                                    </div>  
-                                </div>
-                            </div> 
+                    <div class="row bg-f2 padding " >
+                        <div class="col-md-8" id="widthDisply">
+                           
                         </div>
                         <div class="col-md-3 ml-3 add_block">
                             <div style="overflow:auto;">
@@ -441,40 +399,13 @@
                         </div>
                     </div>
                     <div class="row bg-f2 padding">
-                            <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-3 ">
-                                    <p id="sensorValueResult" class="ml-3 font-weight-bold"></p> 
-                                                                                  
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="row">
-                                        <div class="col-md-2"></div>
-                                        <p class="col-md-6" id="sensorWidthResult"></p>
-                                           
-                                        <div class="col-md-2"><p class="">mm</p></div> 
-                                    </div>  
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="row">
-                                        <div class="col-md-2"></div>
-                                            <p class="col-md-6" id="sensorHeightResult"></p>
-                                        <div class="col-md-2"><p class="">mm</p></div> 
-                                    </div>  
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="row">
-                                        <div class="col-md-2"> </div>
-                                           <p class="col-md-6" id="sensorDaimeterResult"></p>
-                                        <div class="col-md-2"></div> 
-                                    </div>  
-                                </div>
-                            </div> 
+                        <div class="col-md-8" id="widthFinalResult">
+            
                         </div>                 
                     </div>
 
                        {{-- EDIT Width CAMERA --}}
-                     <div class="modal fade" id="editWidth" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="editWidth" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -483,22 +414,8 @@
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <div class="modal-body">
+                              <div class="modal-body" id="widthEditFinalDisply">
                                 
-                                  <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">WIDTH :</label>
-                                    <input type="hidden" value="{{csrf_token()}}" id="token" />
-                                    <input type="text" class="form-control" name="" id="editwidth">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">HEIGHT :</label>
-                                    <input type="text" class="form-control" name="" id="editheight">
-                                  </div>
-                                   <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">DIAMETER :</label>
-                                    <input type="text" class="form-control" name="" id="editdiameter">
-                                  </div>
-                               
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -574,25 +491,7 @@
                                                         </div>
                                                     </div>   
                                                 </div>
-                                                {{-- <div class="col-md-3">
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <p>2.11</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <p> W 54.12 mm</p>   
-                                                        </div>
-                                                        <div class="col">
-                                                            <p>H 25.58 mm</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <p>D 59.86</p>
-                                                        </div>
-                                                    </div>       
-                                                </div> --}}
-                                                    
+
                                         </div>
                                         
                                     </div>
@@ -939,90 +838,113 @@ $('document').ready(function(){
 
 //SENSOR MODE
 var sensorId = 0;
+var sensoreditData = null;
 $('document').ready(function(){
     $('#sendSensor').click(function(){
-        var value = $("#s_v_type").val();
-        var token  = $("#token").val();
         var categorie_id  = categorieId;
         var camera_id = cameraId;
-        if(value == ''){
-            alert ('please fill the required fields');
-            return;
+        value_array = []
+        var count = $('#pda-details tr').length;
+         if(count > 0){
+           for(var i = 1; i <= count; i++ )
+           {
+            if(i === 1){
+                // alert('#focal_length['+i+']')
+               //var value = $('#focal_length[1]').val();   
+               var value = $('input[name="s_v_type"]' ).val();
+               
+
+            }else{
+                var value = $('#s_v_type'+ i).val();
+                
+            }
+             if($('#s_v_type'+ i).val() === ''){
+                alert('Input can not be left blank');
+                return ;
+           }
+            //var value = $('input[name="focal_length"]' ).val();
+            value_array.push(value)
+           }
         }
+        var length_value = value_array.length ;
+
         document.getElementById('selectShowManuFour').style.display = "block";
         document.getElementById('saveHideFour').style.display = "none";
         document.getElementById("add_hideFour").style.display = "none";
         document.getElementById("show_hideFour").style.display = "block"; 
         $.ajax({
            type : "POST",
-           data : "value=" + value + "&_token= "+ token + "&categorie_id=" + categorie_id + "&manufacturerId=" + manufacturerId + "&camera_id=" + camera_id,
+           data : "value=" + value_array + "&categorie_id=" + categorie_id + "&manufacturerId=" + manufacturerId + "&camera_id=" + camera_id,
            url:"/add-sensor",
             success:function(data){
                 console.log(data);
+                sensoreditData = data;
                 categorieId = data.categorie_id;
                 manufacturerId = data.manufacturer_id;
                 cameraId = data.camera_id;
                 sensorId = data.id;
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
+                    var len = data.length;
+                   for( var j = 0; j<len; j++){
+                    var values = data[j]['value'];
+                    var id = data[j]['id'];
+                    
+                    var $newdiv1 = $( "<div class='row'><div class = 'col-md-6'><p>"+values+"</p></div></div>" );
+                    $("#sersorMode" ).append( $newdiv1);
+
+                    var $editData = $("<div class='row datadisplay'><div class='col-md-3'><p>"+values+"</p></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div><input type='number' class='form-control border-td-0 col-md-6' id='width"+id+"' name='width' placeholder='Width' required><div class='col-md-2'><p>mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div> <input type='number' class='form-control border-td-0 col-md-6' id='height"+id+"' name='height'placeholder='Height' required><div class='col-md-2'><p >mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> </div><input type='number' class='form-control border-td-0 col-md-6' id='diameter"+id+"' name='diameter'  placeholder='Diameter' required><div class='col-md-2'></div></div></div></div>");  
+                    $("#widthDisply" ).append( $editData);
+
+                    var $editDataDisplay  = $("<div class='form-group'><label for='recipient-name' class='col-form-label'>Sensor Name :</label><input type='text' class='form-control' name='' value='"+values+"' id='editSensor"+id+"'></div>");          
+                    $("#editDataShow" ).append( $editDataDisplay);
+                }  
            }
         });
     });
 });
 // Edit Sensor
+var widthshowData = null;
 $('document').ready(function(){
     $('#editSetpFour').click(function(){
-        var value = $("#editSensor").val();
-        var token  = $("#token").val();
         var categorie_id  = categorieId;
-        var camera_id = cameraId;
+        var camera_id = sensoreditData[0].camera_id;
+        valueObjectList = [];
+        var count = $('#editDataShow .form-group').length;
+         if(count > 0){
+         for( var j = 0; j<count; j++){
+            valueId = sensoreditData[j]['id'];
+            var value_edit = $('#editSensor'+ valueId).val(); 
+            valueObject = {
+                'id':valueId,
+                'value':value_edit
+            }
+            valueObjectList.push(valueObject);
+         }
+       }
+
         $.ajax({
            type : "POST",
-           data : "value=" + value + "&_token= "+ token ,
-           url:"/add-sensor/" + sensorId,
+           data : "value=" + JSON.stringify(valueObjectList),
+           url:"/edit-sensor/" + camera_id,
             success:function(data){
                 console.log(data);
-                categorieId = data.categorie_id;
-                manufacturerId = data.manufacturer_id;
-                cameraId = data.camera_id;
-                sensorId = data.id;
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
+                sensoreditData = data;
+                $("#sersorMode").html("");
+                $("#widthDisply").html("");
+               var len = data.length;
+               for( var j = 0; j<len; j++){
+                var values = data[j]['value'];
+                var id = data[j]['id'];
+                var $newdiv1 = $( "<div class='row'><div class = 'col-md-6'><p>"+values+"</p></div></div>" );
+                $("#sersorMode" ).append( $newdiv1);
+
+                var $editData = $("<div class='row datadisplay'><div class='col-md-3'><p>"+values+"</p></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div><input type='number' class='form-control border-td-0 col-md-6' id='width"+id+"' name='width' placeholder='Width' required><div class='col-md-2'><p>mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div> <input type='number' class='form-control border-td-0 col-md-6' id='height"+id+"' name='height'placeholder='Height' required><div class='col-md-2'><p >mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> </div><input type='number' class='form-control border-td-0 col-md-6' id='diameter"+id+"' name='diameter'  placeholder='Diameter' required><div class='col-md-2'></div></div></div></div>");  
+                $("#widthDisply" ).append( $editData);
+            }  
+               
            }
         });
     });
 });
-
 
 // get id sensor
 var width_data = '';
@@ -1037,10 +959,8 @@ $('document').ready(function(){
             success: function(data){
                 console.log(data);
                 width_data = data.name;
-                // cameraId = data[0].id;
-                // console.log(data[0].name);
-                  sensorId = data.id;
-                  console.log(data.value) ;  
+                sensorId = data.id;
+                console.log(data.value) ;  
                 document.getElementById('sensorResult_2').innerHTML=data.value;
                 document.getElementById('sensorResult').innerHTML=data.value;
                 document.getElementById('sensorValueResult').innerHTML=data.value;
@@ -1058,7 +978,6 @@ $('document').ready(function(){
                 document.getElementById('reviewWidht').innerHTML=data.width;
                 document.getElementById('reviewHeight').innerHTML=data.height;
                 document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
-
                 var len = data.length;
                //$("#manufacturer").empty();
                 for( var i = 0; i<len; i++){
@@ -1077,88 +996,99 @@ $('document').ready(function(){
     });
 });
 
-
 //width,hight
 $('document').ready(function(){
         $('#sendWidth').click(function(){
-            var width = $("#width").val();
-            var height = $("#height").val();
-            var diameter  = $("#diameter").val();
-            var categorie_id  = categorieId;
-            var camera_id = cameraId;
-            var sensor_id = sensorId;
-             if(width == '' || height == '' || diameter == ''){
-            alert ('please fill the required fields');
-            return;
+            var camera_id = sensoreditData[0].camera_id;
+            console.log(camera_id)
+            widthObjectList = [];
+            var widthCount = $('#widthDisply .datadisplay').length;
+
+            if(widthCount > 0){
+                for( var j = 0; j<widthCount; j++){
+                    var _id = sensoreditData[j]['id'];
+                    var widthValue = $('#width'+ _id).val(); 
+                    var heightValue = $('#height'+ _id).val(); 
+                    var diameterValue = $('#diameter'+ _id).val(); 
+                    widthObject = {
+                        'id':_id,
+                        'width':widthValue,
+                        'height':heightValue,
+                        'diameter':diameterValue
+                    }
+                    widthObjectList.push(widthObject);
+                }
             }
             document.getElementById("selectShowManuFour").style.display = "block";
             document.getElementById("add_hideFive").style.display = "none";
             document.getElementById("show_hideFive").style.display = "block";
-            document.getElementById("selectShowManuReview").style.display = "block";
-            
+            document.getElementById("selectShowManuReview").style.display = "block";  
             $.ajax({
                type : "PUT",
-               data : "width=" + width + "&_token= "+ token + "&height=" + height + "&diameter=" + diameter,
-               url:"/add-sensor/" + sensor_id,
+               data : "widthObjectList=" + JSON.stringify(widthObjectList),
+               url:"/add-sensor/" + camera_id,
                 success:function(data){
                     console.log(data);
-                    sensorId = data.id;
-                    var categorie_id = data.categorie_id
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
-                
+                    var len = data.length;
+                    for( var j = 0; j<len; j++){
+                        var values = data[j]['value'];
+                        var width = data[j]['width'];
+                        var height = data[j]['height'];
+                        var diameter = data[j]['diameter'];
+                        var id = data[j]['id'];
+                        
+                        var $editFianlData = $("<div class='row datadisplay'><div class='col-md-3'><p>"+values+"</p></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div><input type='number' class='form-control border-td-0 col-md-6' id='editwidth"+id+"' name='width' placeholder='Width' value='"+width+"' required><div class='col-md-2'><p>mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div> <input type='number' class='form-control border-td-0 col-md-6' id='editheight"+id+"' name='height'placeholder='Height' value='"+height+"' required><div class='col-md-2'><p >mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> </div><input type='number' class='form-control border-td-0 col-md-6' value='"+diameter+"' id='editdiameter"+id+"' name='diameter'  placeholder='Diameter' required><div class='col-md-2'></div></div></div></div>");  
+                        $("#widthEditFinalDisply" ).append( $editFianlData);
+
+                        var $newdiv1 = $("<div class='row datadisplay'><div class='col-md-3'><p>"+values+"</p></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div><p>"+width+"</p><div class='col-md-2'><p>mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div> <p>"+height+"</p><div class='col-md-2'><p >mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> </div><p>"+diameter+"</p><div class='col-md-2'></div></div></div></div>");  
+                        $("#widthFinalResult" ).append( $newdiv1);
+                    }
                }
             });
         });
     });
+
+
 // Edit with and height
 $('document').ready(function(){
         $('#editSetpFive').click(function(){
-            var width = $("#editwidth").val();
-            var height = $("#editheight").val();
-            var diameter  = $("#editdiameter").val();
-            var categorie_id  = categorieId;
-            var camera_id = cameraId;
-            var sensor_id = sensorId;
+            widthEditObjectList = [];
+            var editwidthCount = $('#widthEditFinalDisply .datadisplay').length;
+            var camera_id = sensoreditData[0].camera_id;
+            if(editwidthCount > 0){
+                for( var j = 0; j<editwidthCount; j++){
+                    var edit_id = sensoreditData[j]['id'];
+                    var widthValue = $('#editwidth'+ edit_id).val(); 
+                    var heightValue = $('#editheight'+ edit_id).val(); 
+                    var diameterValue = $('#editdiameter'+ edit_id).val(); 
+                    widthEditObject = {
+                        'id':edit_id,
+                        'width':widthValue,
+                        'height':heightValue,
+                        'diameter':diameterValue
+                    }
+                    widthEditObjectList.push(widthEditObject);
+                }
+            }
             $.ajax({
                type : "post",
-               data : "width=" + width + "&_token= "+ token + "&height=" + height + "&diameter=" + diameter,
-               url:"/add-sensor-value/" + sensor_id,
+               data : "editWidthResult=" + JSON.stringify(widthEditObjectList) ,
+               url:"/edit-sensor-value/" + camera_id,
                 success:function(data){
                 console.log(data);
-                var categorie_id = data.categorie_id
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
+                 $("#widthFinalResult" ).html(" ");
+                   var len = data.length;
+                    for( var j = 0; j<len; j++){
+                        var values = data[j]['value'];
+                        var width = data[j]['width'];
+                        var height = data[j]['height'];
+                        var diameter = data[j]['diameter'];
+                        var id = data[j]['id'];
+                       
+                        var $newdiv1 = $("<div class='row datadisplay'><div class='col-md-3'><p>"+values+"</p></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div><p>"+width+"</p><div class='col-md-2'><p>mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'></div> <p>"+height+"</p><div class='col-md-2'><p >mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> </div><p>"+diameter+"</p><div class='col-md-2'></div></div></div></div>");  
+                        $("#widthFinalResult" ).append( $newdiv1);
+                    }
+
                }
             });
         });
@@ -1356,71 +1286,14 @@ $('document').ready(function(){
                //document.getElementById('editCategory').value = editCategory;
             });
         });
-        // step 4
-        $(document).ready(function(){
-            var s_value = document.getElementById("s_value").value;          
-            var s_v_type = document.getElementById("s_v_type").value; 
-
-            var s_value2 = $('input[name="s_value2"]').val();         
-            var s_v_type2 = $('input[name="s_v_type2"]').val();
-
-            var s_value3 = $('input[name="s_value3"]').val();         
-            var s_v_type3 = $('input[name="s_v_type3"]').val(); 
-
-            // var s_value3 = document.getElementById("s_value3").value;          
-            // var s_v_type3 = document.getElementById("s_v_type3").value;
-
-            var sensorResult = s_value + ' ' + s_v_type;
-            var sensorResult2 =  ''+ s_v_type2;
-            var sensorResult3 =  ' ' + s_v_type3;
-            //document.getElementById('sensorResult').textContent = sensorResult;
-            // document.getElementById('sensorResult2').textContent = sensorResult2;
-            // document.getElementById('sensorResult3').textContent = sensorResult3;
-
-            // document.getElementById('sensorResult_2').textContent = sensorResult;
-            document.getElementById('sensorValueFinalResult').textContent = sensorResult;
-            document.getElementById('editSensor').value = sensorResult;
-            $("#editSensor").change(function(){
-                var editSensor = document.getElementById("editSensor").value;
-                document.getElementById('s_v_type').value = editSensor;
-               //document.getElementById('sensorResult').textContent = editSensor;
-                // document.getElementById('sensorResult_2').textContent = editSensor;
-                document.getElementById('sensorValueFinalResult').textContent = editSensor;
-
-               //document.getElementById('editCategory').value = editCategory;
-            });
-        });
+  
         
-
         // step-5
         $(document).ready(function(){
-            // var categorie = document.getElementById("categorie").value;
-            // $('input[name="s_value2"]').val();
-            // var camera = document.getElementById("model").value;
-            // document.getElementById('editwidth').value = width;       
-            // document.getElementById('editheight').value = height;       
-            // document.getElementById('editdiameter').value = diameter;
-
-            //var sensorValueResult = 'W' + width+ 'mm' + '   ' +'H'+ height+ 'mm' + ' '+'D'+ diameter;
-            // document.getElementById('categorieFinalResult').textContent = categorie;
-            // document.getElementById('cameraFinalResult').textContent = camera;
-             // document.getElementById('sensorWidthResult').textContent = width;
-             // document.getElementById('sensorHeightResult').textContent = height;
-             // document.getElementById('sensorDiameterResult').textContent = diameter;
+ 
              $("#editwidth,#editheight,#editdiameter").change(function(){
-                // var editwidth = document.getElementById("editwidth").value;
-                //  var editheight = document.getElementById("editheight").value;
-                //  var editdiameter = document.getElementById("editdiameter").value;
-                // document.getElementById('width').value = editwidth;
-                //  document.getElementById('height').value = editheight;
-                //  document.getElementById('diameter').value = editdiameter;
+ 
                 var sensorValueResult = 'W' + editwidth+ 'mm' + '   ' +'H'+ editheight+ 'mm' + ' '+'D'+ editdiameter;
-                // document.getElementById('sensorValueResult').textContent = sensorValueResult;
-                //  document.getElementById('sensorWidthResult').textContent = editwidth;
-                // document.getElementById('sensorHeightResult').textContent = editheight;
-                // document.getElementById('sensorDiameterResult').textContent = editdiameter;
-
-               
             });
         });
         

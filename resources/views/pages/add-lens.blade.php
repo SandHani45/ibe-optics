@@ -304,88 +304,39 @@
                         </div>
                     </div>
                     <div class="row bg-f2 padding ">
-                        <div class="col-md-12" id="focalLength">
+                        <div class="col-md-8">
+                             <table style="width: 100%">
+                                <tbody class="dynamic row" id="pda-details">
+                                    <tr class="col-md-2 flex ml-5">
+                                        <td>
+                                            <label for="annual_eval[1]" class="check-container">
+                                                <input type="checkbox" id="focal_length_check[1]" name="focal_length_check[1]" class="dyn-input" checked="" />
+                                                <span class="checkmark"></span>
+                                                &nbsp;
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" value="{{csrf_token()}}" id="token" />
+                                            <input class="dyn-input form-control focal_length border-td-0 stepby width-100 length" type="number" id="focal_length[1]" name="focal_length"/>  
+                                        </td>
+                                        <td>
+                                            <p>mm</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <div class="row">
-                                <div class="col-md-2">
-                                    <label class="check-container">18mm
-                                        <input type="checkbox" value="18mm"   checked="checked">
-                                        <span class="checkmark"></span>
-                                      </label>
+                                <div class="col-md-4 ml-3">
+                                    <button type="button" class="button-my tiny secondary" data-table="pda-details" id="add-row" ><i class="fas fa-plus"></i> Add</button>
                                 </div>
-                                <div class="col-md-2 ">
-                                    <label class="check-container">20mm
-                                        <input type="checkbox"  value="20mm" >
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div> 
-                                <div class="col-md-2 ">
-                                    <label class="check-container">24mm
-                                        <input type="checkbox" value="24mm"  >
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="check-container">28mm 
-                                        <input type="checkbox" value="28mm"  >
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="check-container">35mm
-                                        <input type="checkbox" value="35mm"  >
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-                                <div class="col-md-2 ">
-                                    <label class="check-container">60mm
-                                        <input type="checkbox"  value="60mm" >
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-                                <div class="col-md-2 ">
-                                    <label class="check-container">100mm
-                                        <input type="checkbox"  value="100mm" >
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-                                <div class="col-md-2 ">
-                                    <label class="check-container">120mm
-                                        <input type="checkbox" value="120mm"  >
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-                                <div class="col-md-2 ">
-                                    <label class="check-container">160mm
-                                        <input type="checkbox" value="160mm"  >
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-                                <div class="col-md-2 ">
-                                    <label class="check-container">180mm
-                                        <input type="checkbox"  value="180mm" >
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-                                <div class="col-md-2 ">
-                                    <label class="check-container">200mm
-                                        <input type="checkbox"  value="200mm">
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-                                <div class="col-md-2 ">
-                                    <label class="check-container">250mm
-                                        <input type="checkbox" value="250mm">
-                                        <span class="checkmark"></span>
-                                      </label>
-                                </div>
-
                             </div>
+                  
                         </div>
                         <div class="col-md-3 ml-3 add_block">
                             <div style="overflow:auto;">
-                               {{--  <div id="saveHideThree" style="float:right;">
-                                    <button type="button" id="sendCamera" class="btn btn-f btn-red font-40 radius-50" onclick="nextPrev(1)">Save</button>
-                                </div> --}}
+                                <div id="saveHideThree" style="float:right;">
+                                    <button type="button" id="sendFocalLength" class="btn btn-f btn-red font-40 radius-50" >Save</button>
+                                </div>
                             </div>     
                         </div>   
                     </div>
@@ -395,7 +346,7 @@
                         <div class="col-md-12">
                             <div class="row bg-top">
                                 <p class="heade-title ml-3 col-md-8"> FOCAL LENGTH</p>
-                                <p class="title-edit col-md-3"><a   class="float-right edit-color " data-toggle="modal" data-target="#cameraModal" data-whatever="@mdo" href="">Edit</a></p> 
+                                <p class="title-edit col-md-3"><a class="float-right edit-color " data-toggle="modal" data-target="#focalLengthModal" data-whatever="@mdo" href="">Edit</a></p> 
                             </div>
                         </div>
                     </div>
@@ -403,17 +354,38 @@
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-4 ml-3">
-                                    <p  class="font-weight-bold" id="modelResult"></p>
+                                    <p  class="font-weight-bold" id="focalLengthResult"></p>
                                 </div>
                             </div>
                         </div>                 
                     </div>
+                    {{-- edit focal length --}}
+                        <div class="modal fade" id="focalLengthModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit FOCAL LENGTH</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body" id="editFocalValueData">
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" id="editSetpFour" class="btn btn-primary" data-dismiss="modal">Save</button>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>     
             </div>
 
              <!-- FOCAL LENGTH VALUES                -->
             <div class="tab mb-2" id="selectShowManuFour">
-                <div class="add_hide">
+                <div class="add_hide" id="add_hideFive">
                     <div class="row bg-top">
                         <div class="col-md-12">
                             <div class="bg-top ">
@@ -425,56 +397,69 @@
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-3 ml-3 ">
-                                    <p id="sensorResult_2" class="">180mm</p> 
+                                    <p id="focalLenthResult" class=""></p> 
                                                                                   
                                 </div>
                                 
-                                <div class="col-md-3">
-                                    <p class="">Lens image diameter [Lid]</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="number" class="form-control border-td-0 col-md-6" id="focal_length_value" name="focal_length_value"  placeholder="Value" required="">
+                                <div class="col-md-8" id="focal_length_value_result">
+                                 {{--    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="">Lens image diameter [Lid]</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control border-td-0 col-md-6" id="focal_length_value" name="focal_length_value"  placeholder="Value" required=""> 
+                                        </div>
+                                    </div> --}}
                                 </div>
                             </div> 
                         </div>
                         <div class="col-md-3 ml-3 add_block">
                             <div style="overflow:auto;">
                                 <div style="float:right;">
-                                    <button type="button"  class="btn btn-f btn-red font-40 radius-50" onclick="nextPrev(1)" >Save</button>
+                                    <button type="button"  class="btn btn-f btn-red font-40 radius-50" id="addFocalValue">Save</button>
                                 </div>
                             </div>     
                         </div> 
                     </div>
                 </div>
-                <div class="add_show">
+                <div class="add_show" id="show_hideFive">
                     <div class="row bg-top">
                         <div class="col-md-12">
                             <div class="row bg-top">
                                 <p class="heade-title ml-3 col-md-8"> FOCAL LENGTH VALUES</p>
-                                <p class="title-edit col-md-3"><a  onclick="nextPrev(-1)" class="float-right edit-color " href="">Edit</a></p> 
+                                <p class="title-edit col-md-3"><a  class="float-right edit-color " data-toggle="modal" data-target="#focalLengthValueModal" data-whatever="@mdo" href="">Edit</a></p> 
                             </div>
                         </div>
                     </div>
                     <div class="row bg-f2 padding">
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-3 ml-3 ">
-                                    <p id="sensorResult_2" class="">180mm</p>                                               
-                                </div>
-                                <div class="col-md-3">
-                                    <p class="">Lens image diameter [Lid]</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <p  class="font-weight-bold" id="focal_length_value_result" ></p>
-                                </div>
-                            </div>
+                        <div class="col-md-8" id="focal_length_value_view">
                         </div>                 
+                    </div>
+                      {{-- edit focal length --}}
+                    <div class="modal fade" id="focalLengthValueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">EDIT FOCAL LENGTH VALUE</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body" id="editFocalLengthValueData">
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" id="editSetpFive" class="btn btn-primary" data-dismiss="modal">Save</button>
+                              </div>
+                            </div>
+                        </div>
                     </div>
                 </div>                  
             </div>
              <!--  T-STOP VALUE -->
             <div class="tab mb-2" id="selectShowManuFive">
-                <div class="add_hide">
+                <div class="add_hide" id="add_hideSix">
                     <div class="row bg-top">
                         <div class="col-md-12">
                             <div class="bg-top ">
@@ -483,79 +468,63 @@
                         </div>
                     </div>
                     <div class="row bg-f2 padding ">
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-3 ml-3">
-                                    <p id="sensorResult_3" class="">180mm</p> 
-                                                                                  
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-6"><p class="mt-3">Max Value <span class="font-weight-bold ml-1">T</span></p> </div>
-                                        <input type="number" class="form-control border-td-0 col-md-4" id="max" name="max" placeholder="Value" required="">
-                                      
-                                    </div>  
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-6"> <p class="mt-3">Min Value <span class="font-weight-bold ml-1">T</span></p> </div>
-                                        <input type="number" class="form-control border-td-0 col-md-4" id="min" name="max" placeholder="Value" required="">
-
-                                    </div>  
-                                </div>
-                              
-                            </div> 
+                        <div class="col-md-8" id="t-shop-value">
+                           
                         </div>
                         <div class="col-md-3 ml-3 add_block">
                             <div style="overflow:auto;">
                                 <div style="float:right;">
-                                    <button type="button"  class="btn btn-f btn-red font-40 radius-50" onclick="nextPrev(1)" >Save</button>
+                                    <button type="button"  class="btn btn-f btn-red font-40 radius-50" id="addTshopValue" >Save</button>
                                 </div>
                             </div>     
                         </div> 
                     </div>
                 </div>
-                <div class="add_show">
+                <div class="add_show" id="show_hideSix">
                     <div class="row bg-top">
                         <div class="col-md-12">
                             <div class="row bg-top">
                                 <p class="heade-title ml-3 col-md-8"> T-STOP VALUE</p>
-                                <p class="title-edit col-md-3"><a  onclick="nextPrev(-1)" class="float-right edit-color " href="">Edit</a></p> 
+
+                                <p class="title-edit col-md-3"><a  class="float-right edit-color " data-toggle="modal" data-target="#editButtonTShopModel" data-whatever="@mdo" href="">Edit</a></p> 
                             </div>
                         </div>
                     </div>
                     <div class="row bg-f2 padding">
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-3 ">
-                                    <p id="sensorResult_3" class="">180mm</p>                                                      
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-6"><p class="mt-3">Max Value <span class="font-weight-bold ml-1">T</span></p> </div>
-                                        <p  class="font-weight-bold mt-3" id="max_result" ></p>   
-                                    </div>  
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-6"> <p class="mt-3">Min Value <span class="font-weight-bold ml-1">T</span></p> </div>
-                                        <p  class="font-weight-bold mt-3" id="min_result" ></p>
+                        <div class="col-md-8" id="focal_tshop_view">
+                            
+                        </div>
+                                                 {{-- edit focal length --}}
+                    <div class="modal fade" id="editButtonTShopModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" >T-STOP VALUE</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body" id="editTshopValueData">
 
-                                    </div>  
-                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" id="saveEditTshotValue" class="btn btn-primary" data-dismiss="modal">Save</button>
+                              </div>
                             </div>
-                        </div>                 
+                        </div>
+                    </div>              
                     </div>
                 </div>                  
             </div>
-            <div class="tab" id="">    
+            <div class="tab" id="selectShowManuSix">    
                 <div class="row bg-top">
                 </div>
                 <div class="row bg-f2 padding ">             
                     <div class="col-md-6 ml-5 add_block">
                         <div style="overflow:auto;">
                             <div style="float:right;">
-                                <button type="button"  
+                                <button type="button" id="reviewButton"  
                                     class="btn btn-f btn-red font-40 radius-50 float-right" 
                                     data-toggle="modal"
                                     data-target="#review" 
@@ -573,44 +542,27 @@
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        
-                                        <div class="form-row">
-                                            <div class="col-md-3">
-                                                <p class="font-40 font-weight-bold">Lens</p>
+                                    <div class="modal-body" >
+                                        <div class='form-row'>
+                                            <div class='col-md-3'>
+                                                <p class='font-40 font-weight-bold'>Lens</p>
                                             </div>
-                                            <div class="col-md-3">
-                                                <p class="font-40" id="final_lens">60mm</p>
+                                            <div class='col-md-3'>
+                                                <p class='font-40' id="lennManufactureReview"></p>
                                             </div>
+                                        </div>
+                                       <div class='form-row'> 
+                                            <div class="col-md-3">
+                                                <p class="font-40 font-weight-bold">Focal length &amp; T-stop value</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-row" id='reviewDisplay'>
                                             
                                         </div>
-
-                                        <div class="form-row">
-                                                <div class="col-md-3">
-                                                    <p class="font-40 font-weight-bold">Focal length & T-stop value</p>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <p> <span> </span> 180mm</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <p> Lens image diameter [Lid] <span>50</span></p>   
-                                                        </div>
-                                                        <div class="col">
-                                                            <p>Max Value T <span>T 2.9</span></p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <p>Min Value T <span>T 22</span></p>
-                                                        </div>
-                                                    </div>   
-                                                </div>   
-                                        </div>
-                                        
                                     </div>
                                     <div class="modal-footer" style=" justify-content: center;">
                                         <button type="button" class="btn btn-red float-right radius-50 add-another "  data-dismiss="modal">Edit</button>
-                                        <button type="submit"  class="btn btn-red float-right radius-50 add-another"  >SUBMIT</button>
+                                        <button type="submit"  onClick="window.location.reload()"  class="btn btn-red float-right radius-50 add-another"  >SUBMIT</button>
                                     </div>
                                     </div>
                                 </div>
@@ -637,18 +589,7 @@
 @endsection
 
 @section('script')
-{{-- <script type="text/javascript">
 
-$('#setpOne').click(function(){
-    var validation_categorie = $('#c_type').val();
-
-   if(validation_categorie == ''){
-    alert ('please filed the data');
-   }
-});
-
-
-</script> --}}
 <script type="text/javascript">
     function showDiv(select){
        if(select.value !== ' '){
@@ -812,7 +753,6 @@ $('document').ready(function(){
             var manufacturer = $("#editManufacturer").val();
             var token  = $("#token").val();
             var categorie_id  = categorieId;
-        
             $.ajax({
                type : "POST",
                data : "manufacturer=" + manufacturer + "&_token= "+ token,
@@ -885,7 +825,7 @@ $('document').ready(function(){
                     console.log(data);
                     categorieId = data.categorie_id;
                     manufacturerId = data.manufacturer_id;
-                    series_id  = data.id;
+                    serie_id  = data.id;
                     document.getElementById('seriesResult').innerHTML=data.name;  
                     document.getElementById('editSeries').value=data.name;  
                }
@@ -914,9 +854,9 @@ $('document').ready(function(){
         });
     });
 });
-// get id camera
+// get id selectLensSeries
 var focal_length_data = '';
-var focal_id = 0;
+var serie_id = 0;
 $('document').ready(function(){
     $("#selectLensSeries").change(function() {
         var selectLensSeries_id = $(this).val();
@@ -927,8 +867,10 @@ $('document').ready(function(){
             success: function(data){
                 console.log(data);
                 sensor_data = data.name;
-                focalId = data[0].id;
-                console.log(data[0].name);
+                serie_id = data[0].id;
+                console.log(data[0].id);
+                categorieId = data[0].categorie_id;
+                manufacturerId = data[0].manufacturer_id;
                     
                 document.getElementById('seriesResult').innerHTML=data[0].name;
                 document.getElementById("editSeries").value = data[0].name;
@@ -950,249 +892,378 @@ $('document').ready(function(){
     });
 });
 
-//SENSOR MODE
-var sensorId = 0;
+//sendFocalLength
+var serie_id = 0;
+var EditFocalLengthData = null;
 $('document').ready(function(){
-    $('#sendSensor').click(function(){
-        var value = $("#s_v_type").val();
-        var token  = $("#token").val();
-        var categorie_id  = categorieId;
-        var camera_id = cameraId;
-        if(value == ''){
-            alert ('please fill the required fields');
-            return;
-        }
-        document.getElementById('selectShowManuFour').style.display = "block";
-        document.getElementById('saveHideFour').style.display = "none";
-        document.getElementById("add_hideFour").style.display = "none";
-        document.getElementById("show_hideFour").style.display = "block"; 
-        $.ajax({
-           type : "POST",
-           data : "value=" + value + "&_token= "+ token + "&categorie_id=" + categorie_id + "&manufacturerId=" + manufacturerId + "&camera_id=" + camera_id,
-           url:"/add-sensor",
-            success:function(data){
-                console.log(data);
-                categorieId = data.categorie_id;
-                manufacturerId = data.manufacturer_id;
-                cameraId = data.camera_id;
-                sensorId = data.id;
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
+    $('#sendFocalLength').click(function(){
+        serie_id  = serie_id;
+        categorie_id = categorieId;
+        manufacturerId = manufacturerId;
+        value_array = []
+       
+        var count = $('#pda-details .focal_length').length
+
+        if(count > 0){
+           for(var i = 1; i <= count; i++ )
+           {
+            if(i === 1){
+                // alert('#focal_length['+i+']')
+               //var value = $('#focal_length[1]').val();   
+               var value = $('input[name="focal_length"]' ).val();
+               
+
+            }else{
+                var value = $('#focal_length'+ i).val();
+                
+            }
+             if($('#focal_length'+ i).val() === ''){
+                alert('Input can not be left blank');
+                return ;
            }
-        });
+            //var value = $('input[name="focal_length"]' ).val();
+            value_array.push(value)
+           }
+          
+
+        }
+       
+        var length_value = value_array.length ;
+
+        document.getElementById('selectShowManuFour').style.display = "block";
+        document.getElementById("add_hideFour").style.display = "none";
+        document.getElementById("show_hideFour").style.display = "block";
+        
+        $.ajax({
+            type : "POST",
+            data : "focal_length=" + value_array + "&categorie_id=" + categorie_id + "&manufacturerId=" + manufacturerId + "&series_id=" + serie_id,
+            url:"/add-focal-length/" + serie_id,
+                success:function(data){
+                console.log(data);
+                var len = data.length;
+                EditFocalLengthData = data;
+                var  serie_id  = data[0].series_id;
+                console.log(serie_id );
+                for( var j = 0; j<len; j++){
+                    var focal_length = data[j]['focal_length'];
+                    var id = data[j]['id'];
+                    //$("#focal_length_value_result").append("<p id='"+id+"'>"+focal_length+"</p>");
+                    $("#focalLengthResult").append("<p>"+focal_length+"</p>");      
+                    $("#focalLenthResult").append("<p>"+focal_length+"</p>");
+                    var $newdiv1 = $( "<div class='row'> <div class ='col-md-6'><p>Lens image diameter [Lid]<p></div> <div class = 'col-md-6'><input type='number' class='form-control border-td-0 col-md-6' id='focal_length_value"+id+"'  name='focal_length_value'  placeholder='Value' required=''>  </div></div>" );
+                      // newdiv2 = document.createElement( "input" ),
+                      // existingdiv1 = document.getElementById("foo");
+                    $("#focal_length_value_result" ).append( $newdiv1);
+
+                     var $editData = $("<div class='form-group'><label for='recipient-name' class='col-form-label'></label><input type='text'class='form-control' value='"+focal_length+"' name='editfocalvalue' id='editfocalvalue"+id+"'></div>");  
+                      $("#editFocalValueData" ).append( $editData);             
+
+                }  
+            } 
+        }); 
     });
 });
-// Edit Sensor
+                     
+
+// EditFocalLength
+var getFocalId = '';
+
 $('document').ready(function(){
     $('#editSetpFour').click(function(){
-        var value = $("#editSensor").val();
-        var token  = $("#token").val();
-        var categorie_id  = categorieId;
-        var camera_id = cameraId;
+        editFocalArry = [];
+        getFocalLenId =[];
+       var count = $('#editFocalValueData .form-group').length
+
+       focalObjectList = [];
+       if(count > 0){
+         for( var j = 0; j<count; j++){
+            getFocalId = EditFocalLengthData[j]['id'];
+            var focal_edit_length = $('#editfocalvalue'+ getFocalId).val(); 
+            editFocalArry.push(focal_edit_length);
+            getFocalLenId.push(getFocalId);
+            focalObject = {
+                'id':getFocalId,
+                'focal_length':focal_edit_length
+            }
+            focalObjectList.push(focalObject)
+         }
+       }
         $.ajax({
-           type : "POST",
-           data : "value=" + value + "&_token= "+ token ,
-           url:"/add-sensor/" + sensorId,
+            type : "PUT",
+            data:"focal_obj="+JSON.stringify(focalObjectList),
+            url:"/edit-focal-length/" + serie_id,
             success:function(data){
                 console.log(data);
-                categorieId = data.categorie_id;
-                manufacturerId = data.manufacturer_id;
-                cameraId = data.camera_id;
-                sensorId = data.id;
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
+                 $("#focalLengthResult").html(""); 
+                 $("#focalLenthResult").html(""); 
+                 $("#focal_length_value_view").html(""); 
+                
+                var len = data.length;
+                for( var j = 0; j<len; j++){
+                    var focal_length = data[j]['focal_length'];
+                    var focal_length_value = data[j]['focal_length_value'];
+                    var id = data[j]['id'];
+                    //$("#focal_length_value_result").append("<p id='"+id+"'>"+focal_length+"</p>");
+                    $("#focalLengthResult").append("<p>"+focal_length+"</p>");      
+                    $("#focalLenthResult").append("<p>"+focal_length+"</p>");
+                    var $newdiv1 = $( "<div class='row ml-2'> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length+" mm</p></div> <div class ='col-md-4'><p>Lens image diameter [Lid]</p></div> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length_value+"</p></div></div>" );
+                    // newdiv2 = document.createElement( "input" ),
+                    // existingdiv1 = document.getElementById("foo");
+                    $("#focal_length_value_view" ).append( $newdiv1);
+
+                }  
+
            }
         });
     });
 });
 
 
-// get id sensor
-var width_data = '';
-var width_id = 0;
+//FOCAL LENGTH VALUES
+var getFocalValueId = '';
 $('document').ready(function(){
-    $("#s_value").change(function() {
-        var sensor_id = $(this).val();
-        $.ajax({
-            url:"/get-sensor/" + sensor_id,
-            method: "post",
-            data: {sensor_id:sensor_id},
-            success: function(data){
-                console.log(data);
-                width_data = data.name;
-                // cameraId = data[0].id;
-                // console.log(data[0].name);
-                  sensorId = data.id;
-                  console.log(data.value) ;  
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
+    $('#addFocalValue').click(function(){
+        editFocalArry = [];
+        getFocalLenId =[];
+       var count = $('#focal_length_value_result .row').length
+       focalValueObjectList = [];
 
+       if(count > 0){
+         for( var j = 0; j<count; j++){
+            getFocalValueId = EditFocalLengthData[j]['id'];
+            var focal_length_value_update = $('#focal_length_value'+ getFocalValueId).val(); 
+            editFocalArry.push(focal_length_value_update);
+            getFocalLenId.push(getFocalValueId);
+            focalValueObject = {
+                'id':getFocalValueId,
+                'focal_length_value':focal_length_value_update
+            }
+            if(focal_length_value_update === ''){
+                alert('Input can not be left blank');
+                return ;
+           }
+
+            focalValueObjectList.push(focalValueObject)
+         }
+       }
+        $.ajax({
+           type : "POST",
+            data:"focal_length_value="+JSON.stringify(focalValueObjectList),
+           url:"/focal-length-value/" + serie_id,
+            success:function(data){
+                console.log(data);
                 var len = data.length;
-               //$("#manufacturer").empty();
-                for( var i = 0; i<len; i++){
-                    var id = data[i]['id'];
-                    var name = data[i]['name'];
-                    var sensors = data[i]['sensors']
-                    for( var j = 0; j<sensors.length; j++){
-                        var id = data[j]['id'];
-                        var name = data[j]['name'];
-                        $("#model").append("<option value='"+id+"'>"+name+"</option>");
-                    }
-                   
-                }    
+                document.getElementById('selectShowManuFour').style.display = "block";
+                document.getElementById("add_hideFive").style.display = "none";
+                document.getElementById("show_hideFive").style.display = "block"; 
+                document.getElementById("selectShowManuFive").style.display = "block";
+                for( var j = 0; j<len; j++){
+                var focal_length = data[j]['focal_length'];
+                var focal_length_value = data[j]['focal_length_value'];
+                var id = data[j]['id'];
+                
+                var $newdiv1 = $( "<div class='row ml-2'> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length+" mm</p></div> <div class ='col-md-4'><p>Lens image diameter [Lid]</p></div> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length_value+"</p></div></div>" );
+                  // newdiv2 = document.createElement( "input" ),
+                  // existingdiv1 = document.getElementById("foo");
+                $("#focal_length_value_view" ).append( $newdiv1);
+
+                 var $editFocalValueData = $("<div class='form-group'><label for='recipient-name' class='col-form-label'></label><input type='text'class='form-control' value='"+focal_length_value+"' name='editfocallengthvalue' id='editfocallengthvalue"+id+"'></div>");  
+                  $("#editFocalLengthValueData" ).append( $editFocalValueData);
+
+                   var $newdiv2 = $( "<div class='row ml-2'> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length+" mm</p></div> <div class ='col-md-4'><div class='form-group flex'><label class='width-50'>Max Value <span class='font-weight-bold ml-1'>T</span></label><input type='number' id='t-shop-max"+id+"' class='form-control mx-sm-3 width-50'></div> </div> <div class ='col-md-4'><div class='form-group flex'><label class='width-50'>Min Value <span class='font-weight-bold ml-1'>T</span></label><input type='number' id='t-shop-min"+id+"' class='form-control mx-sm-3 width-50' ></div></div></div>" );
+                    $("#t-shop-value").append( $newdiv2);             
+
+            } 
+
+           }
+        });
+    });
+});
+
+//EDIT FOCAL LENGTH VALUES
+
+$('document').ready(function(){
+    $('#editSetpFive').click(function(){
+
+       var count = $('#editFocalLengthValueData .form-group').length
+       focalValueEditObjectList = [];
+
+       if(count > 0){
+         for( var j = 0; j<count; j++){
+            editFocalValueId = EditFocalLengthData[j]['id'];
+            var focal_length_value_edit = $('#editfocallengthvalue'+ editFocalValueId).val(); 
+            focalValueEditObject = {
+                'id':editFocalValueId,
+                'focal_length_value':focal_length_value_edit
+            }
+            focalValueEditObjectList.push(focalValueEditObject)
+         }
+       }
+        $.ajax({
+           type : "PUT",
+            data:"focal_length_edit_value="+JSON.stringify(focalValueEditObjectList),
+           url:"/focal-length-value/" + serie_id,
+            success:function(data){
+                console.log(data);
+                var len = data.length;
+                 $("#focal_length_value_view").html(""); 
+                 $("#t-shop-value").html(""); 
+                for( var j = 0; j<len; j++){
+                    var focal_length = data[j]['focal_length'];
+                    var focal_length_value = data[j]['focal_length_value'];
+                    var id = data[j]['id'];
+                     // $("#focalLenthResult").html(""); 
+                    var $newdiv1 = $( "<div class='row ml-2'> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length+" mm</p></div> <div class ='col-md-4'><p>Lens image diameter [Lid]</p></div> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length_value+"</p></div></div>" );
+                    $("#focal_length_value_view" ).append( $newdiv1);
+
+                    var $newdiv2 = $( "<div class='row ml-2'> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length+" mm</p></div> <div class ='col-md-4'><div class='form-group flex'><label class='width-50'>Max Value <span class='font-weight-bold ml-1'>T</span></label><input type='number' id='t-shop-max"+id+"' class='form-control mx-sm-3 width-50'></div> </div> <div class ='col-md-4'><div class='form-group flex'><label class='width-50'>Min Value <span class='font-weight-bold ml-1'>T</span></label><input type='number' id='t-shop-min"+id+"' class='form-control mx-sm-3 width-50' ></div></div></div>" );
+                    $("#t-shop-value").append( $newdiv2);
+                         
+
+                } 
+            }
+        });
+    });
+});
+
+//T-STOP VALUE
+$('document').ready(function(){
+    $('#addTshopValue').click(function(){
+       var count = $('#t-shop-value .row').length
+
+       tshopObjectList = [];
+       if(count > 0){
+         for( var j = 0; j<count; j++){
+            tshopId = EditFocalLengthData[j]['id'];
+            var tshop_max = $('#t-shop-max'+ tshopId).val(); 
+            var tshop_min = $('#t-shop-min'+ tshopId).val(); 
+            tshopObject = {
+                'id':tshopId,
+                'focal_length_tshop_max':tshop_max,
+                'focal_length_tshop_min':tshop_min
+            }
+            if(tshop_max === ''){
+                alert('Input can not be left blank');
+                return ;
+           } 
+           if(tshop_min === ''){
+                alert('Input can not be left blank');
+                return ;
+           }
+            tshopObjectList.push(tshopObject)
+         }
+       }
+        $.ajax({
+           type : "POST",
+            data:"focal_length_tshop="+JSON.stringify(tshopObjectList),
+           url:"/focal-length-tshop-value/" + serie_id,
+            success:function(data){
+                console.log(data);
+                var len = data.length;
+                document.getElementById('selectShowManuFive').style.display = "block";
+                document.getElementById("add_hideSix").style.display = "none";
+                document.getElementById("show_hideSix").style.display = "block"; 
+                document.getElementById("selectShowManuSix").style.display = "block";
+                $("#focal_length_value_view").html(""); 
+                for( var j = 0; j<len; j++){
+                    var focal_length = data[j]['focal_length'];
+                    var focal_length_value = data[j]['focal_length_value'];
+                    var focal_length_tshop_max = data[j]['focal_length_tshop_max'];
+                    var focal_length_tshop_min = data[j]['focal_length_tshop_min'];
+                    var id = data[j]['id'];
+                     //$("#focalLenthResult").html(""); 
+                    var $newdiv1 = $( "<div class='row ml-2'> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length+" mm</p></div> <div class ='col-md-4'><p>Lens image diameter [Lid]</p></div> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length_value+"</p></div></div>" );
+                    $("#focal_length_value_view" ).append( $newdiv1);
+
+                      var $newdiv2 = $( "<div class='row ml-2'> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length+" mm</p></div> <div class ='col-md-4'><div class='form-group flex'><label class='width-50'>Max Value <span class='font-weight-bold ml-1'>T</span></label><p class='width-50 font-weight-bold'> "+focal_length_tshop_max+"</p></div> </div> <div class ='col-md-4'><div class='form-group flex'><label class='width-50'>Min Value <span class='font-weight-bold ml-1'>T</span></label><p class='width-50 font-weight-bold'>"+focal_length_tshop_min+"</p></div></div></div>" );
+                    $("#focal_tshop_view").append( $newdiv2); 
+
+                    var $editTshopData = $("<div class = 'row'> <div class='col-md-6'><div class='form-group'><label for='recipient-name' class='col-form-label'></label><input type='text'class='form-control' value='"+focal_length_tshop_max+"' name='editfocallengthvalue' id='edit_tshopmax"+id+"'></div></div><div class='col-md-6' ><div class='form-group'><label for='recipient-name' class='col-form-label'></label><input type='text'class='form-control' value='"+focal_length_tshop_min+"' name='editfocallengthvalue' id='edit_tshopmin"+id+"'></div></div></div>");  
+                  $("#editTshopValueData" ).append( $editTshopData);     
+                } 
             }
         });
     });
 });
 
 
-//width,hight
+//EDIT T-STOP VALUE
 $('document').ready(function(){
-        $('#sendWidth').click(function(){
-            var width = $("#width").val();
-            var height = $("#height").val();
-            var diameter  = $("#diameter").val();
-            var categorie_id  = categorieId;
-            var camera_id = cameraId;
-            var sensor_id = sensorId;
-             if(width == '' || height == '' || diameter == ''){
-            alert ('please fill the required fields');
-            return;
+    $('#saveEditTshotValue').click(function(){
+
+       var count = $('#editTshopValueData .row').length;
+ 
+       tshopEditObjectList = [];
+       if(count > 0){
+         for( var j = 0; j<count; j++){
+            tshopId = EditFocalLengthData[j]['id'];
+            var edit_tshop_max = $('#edit_tshopmax'+ tshopId).val(); 
+            var edit_tshop_min = $('#edit_tshopmin'+ tshopId).val(); 
+            tshopEditObject = {
+                'id':tshopId,
+                'focal_length_tshop_max':edit_tshop_max,
+                'focal_length_tshop_min':edit_tshop_min
             }
-            document.getElementById("selectShowManuFour").style.display = "block";
-            document.getElementById("add_hideFive").style.display = "none";
-            document.getElementById("show_hideFive").style.display = "block";
-            document.getElementById("selectShowManuReview").style.display = "block";
-            
-            $.ajax({
-               type : "PUT",
-               data : "width=" + width + "&_token= "+ token + "&height=" + height + "&diameter=" + diameter,
-               url:"/add-sensor/" + sensor_id,
-                success:function(data){
-                    console.log(data);
-                    sensorId = data.id;
-                    var categorie_id = data.categorie_id
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
-                
-               }
-            });
-        });
-    });
-// Edit with and height
-$('document').ready(function(){
-        $('#editSetpFive').click(function(){
-            var width = $("#editwidth").val();
-            var height = $("#editheight").val();
-            var diameter  = $("#editdiameter").val();
-            var categorie_id  = categorieId;
-            var camera_id = cameraId;
-            var sensor_id = sensorId;
-            $.ajax({
-               type : "post",
-               data : "width=" + width + "&_token= "+ token + "&height=" + height + "&diameter=" + diameter,
-               url:"/add-sensor-value/" + sensor_id,
-                success:function(data){
+            tshopEditObjectList.push(tshopEditObject)
+         }
+       }
+        $.ajax({
+           type : "PUT",
+            data:"focal_length_edit_tshop="+JSON.stringify(tshopEditObjectList),
+           url:"/focal-length-tshop-value/" + serie_id,
+            success:function(data){
                 console.log(data);
-                var categorie_id = data.categorie_id
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
-               }
-            });
+                var len = data.length;
+                $("#focal_tshop_view").html(""); 
+              
+                for( var j = 0; j<len; j++){
+                    var focal_length = data[j]['focal_length'];
+                    var focal_length_value = data[j]['focal_length_value'];
+                    var focal_length_tshop_max = data[j]['focal_length_tshop_max'];
+                    var focal_length_tshop_min = data[j]['focal_length_tshop_min'];
+                    var id = data[j]['id'];
+                      var $newdiv2 = $( "<div class='row ml-2'> <div class ='col-md-3'><p class='font-weight-bold'>"+focal_length_value+" mm</p></div> <div class ='col-md-4'><div class='form-group flex'><label class='width-50'>Max Value <span class='font-weight-bold ml-1'>T</span></label><p class='width-50 font-weight-bold'> "+focal_length_tshop_max+"</p></div> </div> <div class ='col-md-4'><div class='form-group flex'><label class='width-50'>Min Value <span class='font-weight-bold ml-1'>T</span></label><p class='width-50 font-weight-bold'>"+focal_length_tshop_min+"</p></div></div></div>" );
+                    $("#focal_tshop_view").append( $newdiv2); 
+ 
+                } 
+            }
         });
     });
+});
+
+
+//REVIEW
+
+$('document').ready(function(){
+    $('#reviewButton').click(function(){
+        $.ajax({
+           type : "get",
+           url:"/lens-review/" + serie_id,
+            success:function(data){
+                console.log(data);
+                var len = data.length;
+                  $("#reviewDisplay").html(""); 
+                  $("#lennManufactureReview").html(""); 
+                 var lensName = data[0]['name'];
+                  document.getElementById('lennManufactureReview').innerHTML = lensName;
+                
+                 for( var j = 0; j<len; j++){
+                    var focal_length_value = data[j]['focal_length_value'];
+                    var focal_length = data[j]['focal_length'];
+                    var focal_length_tshop_max = data[j]['focal_length_tshop_max'];
+                    var focal_length_tshop_min = data[j]['focal_length_tshop_min'];
+                    var id = data[j]['id'];
+                    var $review = $("<div class='col-md-12'><div class='row'><div class='col'><p><span></span>"+focal_length+"</p></div><div class='col'><p>Lens image diameter [Lid]<span>"+focal_length+"</span></p></div><div class='col'><p>Max Value T<span>T "+focal_length_tshop_max+"</span></p></div><div class='col'><p>Min Value T <span>T "+focal_length_tshop_min+"</span></p></div></div></div>");  
+                    $("#reviewDisplay" ).append( $review);
+                }  
+            }
+        });
+    });
+});
 
 
 
-// $('document').ready(function(){
-//         $('#reviewData').click(function(){
-//             var categorie_id = categorie_id;
-//             $.ajax({
-//                type : "post",
-//                data : {categorie_id:categorie_id},
-//                url:"/camera-review/" + categorie_id,
-//                 success:function(data){
-//                     console.log(data);
-             
-//                }
-//             });
-//         });
-//     });
+
 </script>
 
 <script>
@@ -1319,124 +1390,6 @@ $('document').ready(function(){
         var add_hide = document.getElementsByClassName("add_hide");
         var add_show = document.getElementsByClassName("add_show");
 
-        // disply form data
-        // step-1
-        
-        //var editCategory = document.getElementById("editCategory").value;
-        $(document).ready(function(){
-            var categorie = document.getElementById("categorie").value;          
-            var c_type = document.getElementById("c_type").value;
-            var categorie_result = c_type ;
-            //document.getElementById('categorie_result').textContent = sandhani;
-            document.getElementById('categorieFinalResult').textContent = categorie_result;
-            document.getElementById('editCategory').value = categorie_result;
-            $("#editCategory").change(function(){
-                var editCategory = document.getElementById("editCategory").value;
-                document.getElementById('c_type').value = editCategory;
-               document.getElementById('categorie_result').textContent = editCategory;
-               document.getElementById('categorieFinalResult').textContent = editCategory;
-            });
-        });
-            
-        // step-2
-        $(document).ready(function(){
-            var manufacturer = document.getElementById("manufacturer").value;          
-            var m_type = document.getElementById("m_type").value;
-            var manufacturerResult = manufacturer + ' ' + m_type;
-            // document.getElementById('manufacturerResult').textContent = manufacturerResult;
-            document.getElementById('editManufacturer').value = manufacturerResult;
-            $("#editManufacturer").change(function(){
-                var editManufacturer = document.getElementById("editManufacturer").value;
-                document.getElementById('m_type').value = editManufacturer;
-               document.getElementById('manufacturerResult').textContent = editManufacturer;
-               //document.getElementById('editCategory').value = editCategory;
-            });
-        });
-
-        // step-3
-        $(document).ready(function(){
-            var model = document.getElementById("model").value;          
-            var mo_type = document.getElementById("mo_type").value;
-            var modelResult = model + ' ' + mo_type;
-            // document.getElementById('modelResult').textContent = modelResult;
-            document.getElementById('cameraFinalResult').textContent = modelResult;
-            document.getElementById('editCamera').value = modelResult;
-            $("#editCamera").change(function(){
-                var editCamera = document.getElementById("editCamera").value;
-                document.getElementById('mo_type').value = editCamera;
-                document.getElementById('modelResult').textContent = editCamera;
-                document.getElementById('cameraFinalResult').textContent = editCamera;
-               //document.getElementById('editCategory').value = editCategory;
-            });
-        });
-        // step 4
-        $(document).ready(function(){
-            var s_value = document.getElementById("s_value").value;          
-            var s_v_type = document.getElementById("s_v_type").value; 
-
-            var s_value2 = $('input[name="s_value2"]').val();         
-            var s_v_type2 = $('input[name="s_v_type2"]').val();
-
-            var s_value3 = $('input[name="s_value3"]').val();         
-            var s_v_type3 = $('input[name="s_v_type3"]').val(); 
-
-            // var s_value3 = document.getElementById("s_value3").value;          
-            // var s_v_type3 = document.getElementById("s_v_type3").value;
-
-            var sensorResult = s_value + ' ' + s_v_type;
-            var sensorResult2 =  ''+ s_v_type2;
-            var sensorResult3 =  ' ' + s_v_type3;
-            //document.getElementById('sensorResult').textContent = sensorResult;
-            // document.getElementById('sensorResult2').textContent = sensorResult2;
-            // document.getElementById('sensorResult3').textContent = sensorResult3;
-
-            // document.getElementById('sensorResult_2').textContent = sensorResult;
-            document.getElementById('sensorValueFinalResult').textContent = sensorResult;
-            document.getElementById('editSensor').value = sensorResult;
-            $("#editSensor").change(function(){
-                var editSensor = document.getElementById("editSensor").value;
-                document.getElementById('s_v_type').value = editSensor;
-               //document.getElementById('sensorResult').textContent = editSensor;
-                // document.getElementById('sensorResult_2').textContent = editSensor;
-                document.getElementById('sensorValueFinalResult').textContent = editSensor;
-
-               //document.getElementById('editCategory').value = editCategory;
-            });
-        });
-        
-
-        // step-5
-        $(document).ready(function(){
-            // var categorie = document.getElementById("categorie").value;
-            // $('input[name="s_value2"]').val();
-            // var camera = document.getElementById("model").value;
-            // document.getElementById('editwidth').value = width;       
-            // document.getElementById('editheight').value = height;       
-            // document.getElementById('editdiameter').value = diameter;
-
-            //var sensorValueResult = 'W' + width+ 'mm' + '   ' +'H'+ height+ 'mm' + ' '+'D'+ diameter;
-            // document.getElementById('categorieFinalResult').textContent = categorie;
-            // document.getElementById('cameraFinalResult').textContent = camera;
-             // document.getElementById('sensorWidthResult').textContent = width;
-             // document.getElementById('sensorHeightResult').textContent = height;
-             // document.getElementById('sensorDiameterResult').textContent = diameter;
-             $("#editwidth,#editheight,#editdiameter").change(function(){
-                // var editwidth = document.getElementById("editwidth").value;
-                //  var editheight = document.getElementById("editheight").value;
-                //  var editdiameter = document.getElementById("editdiameter").value;
-                // document.getElementById('width').value = editwidth;
-                //  document.getElementById('height').value = editheight;
-                //  document.getElementById('diameter').value = editdiameter;
-                var sensorValueResult = 'W' + editwidth+ 'mm' + '   ' +'H'+ editheight+ 'mm' + ' '+'D'+ editdiameter;
-                // document.getElementById('sensorValueResult').textContent = sensorValueResult;
-                //  document.getElementById('sensorWidthResult').textContent = editwidth;
-                // document.getElementById('sensorHeightResult').textContent = editheight;
-                // document.getElementById('sensorDiameterResult').textContent = editdiameter;
-
-               
-            });
-        });
-        
         // Exit the function if any field in the current tab is invalid:
     //   if (n == 1 && !validateForm()) return false;
         // Hide the current tab:
@@ -1488,9 +1441,5 @@ $('document').ready(function(){
         x[n].className += " active";
     }
     </script>
-        <!-- Add Row Functionality -->
-   <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'></script>
-	<script  src="js/reactIndex.js"></script>
 
 @endsection

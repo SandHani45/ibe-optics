@@ -14,9 +14,9 @@
     </style>
 @endsection
 @section('content')
-	 <section class="mt-4 flex ps-fix">
+   <section class="mt-4 flex ps-fix">
         <button class="tablink border"  id="defaultOpen" onclick="openPage('cemere', this, '#d10a11')">CAMERA</button>
-        <button class="tablink border" onclick="openPage('lens', this, '#d10a11')">LENS</button>
+        <button class="tablink border" id="lensButton" onclick="openPage('lens', this, '#d10a11')">LENS</button>
 
     </section>
 
@@ -29,10 +29,10 @@
                         ><i class="fas fa-plus"></i> Add 
                     </a>
                 </div>
-                <div class="modal fade form-container" id="myModal">
+                <div class="modal fade form-container" id="cameraModel">
                     <div class="modal-dialog">
                       <div class="modal-content bg-lit">
-                      
+        
                         <!-- Modal Header -->
                         <div class="modal-header pd-04">
                           <!-- <h4 class="modal-title">Modal Heading</h4> -->
@@ -41,77 +41,19 @@
                         
                         <!-- Modal body -->
                         <div class="modal-body bg-f2">
-                            <form name="customer-details" class="customer-details form-horizontal width">
+                            <div name="customer-details" class="customer-details form-horizontal width">
                                 <fieldset>
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group row">
-                                                    <label for="Categorie" class="col-sm-4 col-form-label font-weight-bold">Categorie</label>
-                                                    <div class="col-sm-8">
-                                                         <input type="name" id="camera_categorie" class="form-control border-td-0 col-md-10" placeholder="" required="">
-                                                        <!-- <input type="text" id="txtName" name="name" class="form-control"> -->
-                                                        <div class="error-msg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                 <div class="form-group row">
-                                                    <label for="Categorie" class="col-sm-4 col-form-label font-weight-bold">Manufacturer</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="name" id="camera_manufacturer" class="form-control border-td-0 col-md-10" placeholder="" required="">
-                                                        <!-- <input type="text" id="txtName" name="name" class="form-control"> -->
-                                                        <div class="error-msg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                 <div class="form-group row">
-                                                    <label for="Categorie" class="col-sm-4 col-form-label font-weight-bold">Name</label>
-                                                    <div class="col-sm-8">
-                                                         <input type="name" id="camera_name" class="form-control border-td-0 col-md-10" placeholder="" required="">
-                                                        <!-- <input type="text" id="txtName" name="name" class="form-control"> -->
-                                                        <div class="error-msg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   <div class="col-md-12">
+                                     <div class="row" id="showModelData">
+                                       
+                                     </div>
+                                   </div>
                                     <div class="form-group">
                                         <label for="txtName" class="control-label col-md-4 font-weight-bold">Sensor Mode </label>
                                     </div>
                                      <div class="col-md-12">
-                                        <div class="row">
-                                           <div class="col-md-3 ">
-                                            <div class="row">
-                                                <input type="number" id="camera_value" class="form-control border-td-0 col-md-8" id="" placeholder="" required>
-                                            </div>
-                                                
-                                           </div>
-                                           <div class="col-md-3">
-                                                <div class="row">
-                                                    <div class="col-md-2"> <p class="">W</p></div>
-                                                        <input type="number" id="camera_width" class="form-control border-td-0 col-md-6" id="" placeholder="" required>
-                                                    <div class="col-md-2"><p class="">mm</p></div> 
-                                                </div>  
-                                           </div>
-                                           <div class="col-md-3">
-                                                <div class="row">
-                                                    <div class="col-md-2"> <p class="">H</p></div>
-                                                        <input type="number" id="camera_height" class="form-control border-td-0 col-md-6" id="" placeholder="" required>
-                                                    <div class="col-md-2"><p class="">mm</p></div> 
-                                                </div>  
-                                           </div>
-                                           <div class="col-md-3">
-                                               <div class="row">
-                                                    <div class="col-md-2"> <p class="">D</p></div>
-                                                        <input type="number"  id="camera_diameter" class="form-control border-td-0 col-md-6" id="" placeholder="" required>
-                                                    <div class="col-md-2"><p class="">mm</p></div> 
-                                                </div>  
-                                           </div>
+                                        <div class="row" id="showModelWidthData">
+                                       
                                         </div>
                                     </div>
 
@@ -126,13 +68,9 @@
                                     </div>
                                     
                                 </div>
-                                
 
-                                  <!-- <button class="reset-button btn btn-danger">Reset</button>
-                                  <button class="add-button btn btn-success">Add</button>
-                                  <button class="update-button btn btn-primary">Update</button> -->
                                 </fieldset>
-                            </form>
+                            </div>
                         </div>
 
                       </div>
@@ -140,7 +78,7 @@
                 </div>
              
                 <div class="table-container width">
-                    <table   class="customer-table table table-hover datatables" style="width:100%">
+                    <table  class="customer-table table table-hover datatables" style="width:100%">
                       <thead>
                         <tr class="table-head">
                           <th>Category</th>
@@ -151,15 +89,42 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr role="row" class="odd">
-                          <td class="sorting_1"></td>
-                          <td></td>
-                          <td>cdaniels0@java.com</td>
-                          <td class=" details-control"></td>
-                          <td><div style="text-align: center"><a href="" class="edit_details" data-toggle="modal" data-target="#myModal" data-id="1" title="edit">
-                            Edit</a>
-                            </div></td>
-                          </tr>
+                          @foreach ($camera_datas as $camera)
+
+                            <tr role="row" class="odd">
+ 
+                                <td>{{$camera->categories['name']}}</td>
+                                <td>{{$camera->name}}</td>
+                               
+                                    <td >{{$camera->manufacturers['name']}}</td>
+                                
+                                
+                                <td class="details-control" onclick="myFunction()">View Sensor Details</td>
+                                <td>
+                                    <div style="text-align: center" data-id="{{$camera->id}}" class="ajax_edit"><a href=""  data-toggle="modal" data-target="#cameraModel" title="edit">
+                                        Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                             @foreach ($camera->sensors as $sensor)
+                                <tr class="details-row"  id="myDIV">
+                                    <td colspan="5">
+                                        <div class="details-container">
+                                            <table cellpadding="5" cellspacing="0" border="0" class="details-table">
+                                                <tbody class="row">
+                                                    <tr class="inside">
+                                                        <td class="c-data">{{$sensor->id}}</td>
+                                                        <td class="c-data">W {{$sensor->id}} mm </td>
+                                                        <td class="c-data">H {{$sensor->id}} mm</td>
+                                                        <td class="c-data">D {{$sensor->id}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach 
+                            @endforeach
                       </tbody>
                     </table>
                 </div>
@@ -175,7 +140,7 @@
                         ><i class="fas fa-plus"></i> Add 
                     </a>
                 </div>
-                <div class="modal fade form-container" id="myModal_lens">
+                <div class="modal fade form-container" id="lensModel">
                     <div class="modal-dialog">
                       <div class="modal-content bg-lit">
                       
@@ -190,89 +155,22 @@
                             <form name="customer-details" class="customer-details form-horizontal width">
                                 <fieldset>
                                     <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group row">
-                                                    <label for="Categorie" class="col-sm-4 col-form-label font-weight-bold">Categorie</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control border-td-0">
-                                                          <option>Digital</option>
-                                                        </select>
-                                                        <!-- <input type="text" id="txtName" name="name" class="form-control"> -->
-                                                        <div class="error-msg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                 <div class="form-group row">
-                                                    <label for="Categorie" class="col-sm-4 col-form-label font-weight-bold">Manufacturer</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control border-td-0">
-                                                          <option>Nikon</option>
-                                                        </select>
-                                                        <!-- <input type="text" id="txtName" name="name" class="form-control"> -->
-                                                        <div class="error-msg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                 <div class="form-group row">
-                                                    <label for="Categorie" class="col-sm-4 col-form-label font-weight-bold">Categorie</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control border-td-0">
-                                                          <option>3300 D</option>
-                                                        </select>
-                                                        <!-- <input type="text" id="txtName" name="name" class="form-control"> -->
-                                                        <div class="error-msg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="row" id="showLensModelData">
+                                           
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="txtName" class="control-label col-md-4 font-weight-bold">Sensor Mode </label>
                                     </div>
                                      <div class="col-md-12">
-                                        <div class="row">
-                                           <div class="col-md-3 ">
-                                            <div class="row">
-                                                <input type="number" class="form-control border-td-0 col-md-8" id="" placeholder="" required>
-                                            </div>
-                                                
-                                           </div>
-                                           <div class="col-md-3">
-                                                <div class="row">
-                                                    <div class="col-md-2"> <p class="">W</p></div>
-                                                        <input type="number" class="form-control border-td-0 col-md-6" id="" placeholder="" required>
-                                                    <div class="col-md-2"><p class="">mm</p></div> 
-                                                </div>  
-                                           </div>
-                                           <div class="col-md-3">
-                                                <div class="row">
-                                                    <div class="col-md-2"> <p class="">H</p></div>
-                                                        <input type="number" class="form-control border-td-0 col-md-6" id="" placeholder="" required>
-                                                    <div class="col-md-2"><p class="">mm</p></div> 
-                                                </div>  
-                                           </div>
-                                           <div class="col-md-3">
-                                               <div class="row">
-                                                    <div class="col-md-2"> <p class="">D</p></div>
-                                                        <input type="number" class="form-control border-td-0 col-md-6" id="" placeholder="" required>
-                                                    <div class="col-md-2"><p class="">mm</p></div> 
-                                                </div>  
-                                           </div>
+                                        <div class="row" id="showModelLensValueData">
+
                                         </div>
                                     </div>
-
-                        
-
                                 <div class="col-md-12 mt-5">
                                     <div class="row">
                                         <div class="col-md-7 ml-5">
-                                            <button class="update-button btn btn-red radius-50 add-another">Save Changes</button>
+                                            <button id="lenSave" class="update-button btn btn-red radius-50 add-another">Save Changes</button>
                                         </div>
                                         
                                     </div> 
@@ -285,16 +183,51 @@
                 </div>
              
                 <div class="table-container width">
-                    <table   class="customer-table table table-hover datatables_lens" style="width:100%">
+                    <table id="lens_datatables" class="customer-table table table-hover " style="width:100%">
                       <thead>
                         <tr class="table-head">
                           <th>Manufacturer</th>
                           <th>Series</th>
                           <th></th>
                           <th></th>
+                          <th></th>
+                          
                         </tr>
                       </thead>
                       <tbody>
+                         @foreach ($lensdatas as $lensData)
+
+                            <tr role="row" class="odd">
+                                @foreach ($lensData->manufactures as $manufacture)
+                                    <td >{{$manufacture->name}}</td>
+                                @endforeach
+                                <td>{{$lensData->name}}</td>
+                                <td class="details-control" onclick="myFunction()">View Sensor Details</td>
+                                <td>
+                                    <div style="text-align: center" data-id="{{$lensData->id}}" class="lensEditButton"><a href=""  data-toggle="modal" data-target="#lensModel" title="edit">
+                                        Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                             @foreach ($lensData->focalLengths as $focalLength)
+                                <tr class="details-row"  id="myDIV">
+                                    <td colspan="5">
+                                        <div class="details-container">
+                                            <table cellpadding="5" cellspacing="0" border="0" class="details-table">
+                                                <tbody class="row">
+                                                    <tr class="inside">
+                                                        <td class="c-data">{{$focalLength->focal_length}} mm</td>
+                                                        <td class="c-data">Lens image diameter [Lid] {{$focalLength->focal_length_value}}  </td>
+                                                        <td class="c-data">Max Value T {{$focalLength->focal_length_tshop_max}} </td>
+                                                        <td class="c-data">Min Value T {{$focalLength->focal_length_tshop_min}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            @endforeach
                       </tbody>
                     </table>
                 </div>
@@ -328,97 +261,19 @@
     </script>
 
     <!-- table script -->
-   
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
-<script>
-
-$(document).ready(function() {
-  
-
-  
-  var data = [
-   @foreach ($alldatas as $alldata)
-    {
-        "id":{{ $alldata->id }},
-        "category":"{{ $alldata->categorieName }}",
-        "manufacturer":"{{ $alldata->manufacturerName }}",
-        "name":"{{ $alldata->cameraName }}",
-        "s1_1":{{ $alldata->value }},
-        "s1_w":{{ $alldata->width }},
-        "s1_h":{{ $alldata->height }},
-        "s1_d":{{ $alldata->diameter }},
-      
-    },
-    @endforeach
-   
-    
-  ];
-  
-  
-  function format (data) {
-      return '<div class="details-container">'+
-          '<table cellpadding="5" cellspacing="0" border="0" class="details-table">'+
-              '<tr class="inside">'+
-                    '<td class="c-data">'+data.s1_1+'</td>'+
-                    '<td class="c-data">'+'W'+ ' ' +data.s1_w+ ' '+ 'mm'+' </td>'+
-                    '<td class="c-data">'+'H'+ ' ' +data.s1_h+ ' '+ 'mm'+ '</td>'+
-                    '<td class="c-data">'+'D'+ ' '+data.s1_d+'</td>'+
-              '</tr>'+
-             
-              
-          '</table>'+
-        '</div>';
-  };
-  
-  var table = $('.datatables').DataTable({
-    // Column definitions
-    columns : [
-    
-      {data : 'category'},
-      {data : 'manufacturer'},
-      {data : 'name'},
-      {
-        className      : 'details-control',
-        defaultContent : 'View Sensor Details',
-        data           : null,
-        orderable      : false
-      },
-      {
-        data: null,
-        render: function (data, type, row, meta) {
-          return `<div style="text-align: center" data-id="${data.id}" class="ajax_edit"><a href="" class="edit_details"  data-toggle="modal" data-target="#myModal" title="edit" >
-          Edit</a>
-          </div>`;
-          // return `<div style="text-align: center"><a href="" class="edit_details"  data-toggle="modal" data-target="#myModal" data-id="${data.id}" title="edit" >
-          // <img src="http://i.imgur.com/DHma3ln.png" alt="Edit" width=20px></a>
-          // <a href="" class="delete_details" data-id="${data.id}" title="delete" style="padding-left: 20px;">
-          // <img src="http://i.imgur.com/HNUCXDU.png" alt="Delete" width=20px></a></div>`;
+   <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "";
+            } else {
+                x.style.display = "none";
+            }
         }
-                } 
-    ],
-    
-    data : data,
-    
-    pagingType : 'full_numbers',
-    
-  });
- 
-  $('.datatables tbody').on('click', 'td.details-control', function () {
-     var tr  = $(this).closest('tr'),
-         row = table.row(tr);
-    
-     if (row.child.isShown()) {
-       tr.next('tr').removeClass('details-row');
-       row.child.hide();
-       tr.removeClass('shown');
-     }
-     else {
-       row.child(format(row.data())).show();
-       tr.next('tr').addClass('details-row');
-       tr.addClass('shown');
-     }
-  });
+   </script>
+{{-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+ --}}
+<script>
 
 // Ajax call
 $.ajaxSetup({
@@ -426,7 +281,9 @@ $.ajaxSetup({
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
+
   var id= 0;
+  var cameraEditAllDataArray = [];
    $('document').ready(function(){
       $('.ajax_edit').click(function(){
         var edit_id = $(this).data("id");
@@ -436,124 +293,161 @@ $.ajaxSetup({
             method: "post",
             success: function(data)
             {
+              $('#showModelData').html(' ');
+              $('#showModelWidthData').html(' ');
+              console.log(data[0].name);
               console.log(data);
-                id =  data[0].id;
-               document.getElementById('camera_width').value=data[0].width;
-               document.getElementById('camera_value').value=data[0].value;
-               document.getElementById('camera_height').value=data[0].height;
-               document.getElementById('camera_diameter').value=data[0].diameter;
-               document.getElementById('camera_name').value=data[0].cameraName;
-               document.getElementById('camera_categorie').value=data[0].categorieName;
-               document.getElementById('camera_manufacturer').value=data[0].manufacturerName;
+              console.log(data[0].manufacturers.name);
+              
+              var divNew = $(" <div class='col-md-12'><div class='row'><div class='col-md-4'><div class='form-group row'><label for='Categorie' class='col-sm-4 col-form-label font-weight-bold'>Categorie</label><div class='col-sm-8'><input type='name' id='camera_categorie' class='form-control border-td-0 col-md-10' value='"+data[0].categories.name+"' placeholder=''required></div></div></div><div class='col-md-4'><div class='form-group row'><label for='' class='col-sm-4 col-form-label font-weight-bold'>Manufacturer</label><div class='col-sm-8'><input type='name' id='camera_manufacturer' value='"+data[0].manufacturers.name+"' class='form-control border-td-0 col-md-10' placeholder=''required></div></div></div><div class='col-md-4'><div class='form-group row'><label for='' class='col-sm-4 col-form-label font-weight-bold'>Name</label><div class='col-sm-8'><input type='name' id='camera_name' class='form-control border-td-0' value='"+data[0].name+"'  placeholder=''required></div></div></div></div></div>");
+                var len = data.length;
+                $('#showModelData').append(divNew)
+
+                for( var i = 0; i<len; i++){
+                    var sensors = data[i].sensors;
+                    for(var j = 0; j<sensors.length; j++){
+                        var value = sensors[j].value;
+                        var width = sensors[j].width;
+                        var height = sensors[j].height;
+                        var diameter = sensors[j].diameter;
+                        var id = sensors[j].id;
+                        cameraEditAllData = sensors[j].id;
+                        console.log(diameter)
+                    var divNew2 = $("<div class='row ml-2'><div class='col-md-3'><div class='row'><input type='number' id='camera_value"+id+"' class='form-control border-td-0 col-md-8' value='"+value+"'  placeholder='' required></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> <p class=''>W</p></div><input type='number' id='camera_width"+id+"' value='"+width+"' class='form-control border-td-0 col-md-6' required><div class='col-md-2'><p class=''>mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> <p >H</p></div><input type='number' id='camera_height"+id+"' value='"+height+"' class='form-control border-td-0 col-md-6' placeholder='' required><div class='col-md-2'><p>mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> <p>D</p></div><input type='number' value='"+diameter+"'  id='camera_diameter"+id+"' class='form-control border-td-0 col-md-6' placeholder='' required><div ><p >mm</p></div></div></div></div>");
+                    $('#showModelWidthData').append(divNew2);
+                    cameraEditAllDataArray.push(cameraEditAllData);
+                }
+               }
             }
         });
-      });
+    });
 });
-
+   
    $('document').ready(function(){
         $('#save_change').click(function(){
             var camera_categorie = $("#camera_categorie").val();
             var camera_manufacturer = $("#camera_manufacturer").val();
             var camera_name  = $("#camera_name").val();
             var id = id;
-            
+           console.log(cameraEditAllDataArray);
+            var count = $('#showModelWidthData .row').length;
+    
+                   cameraEditObjectList = [];
+                   if(count > 0){
+                     for( var j = 0; j<count; j++){
+                        
+                        cameraId = cameraEditAllData[j]['id'];
+                        var camera_value = $('#camera_value'+ cameraId).val(); 
+                        var edit_tshop_min = $('#edit_tshopmin'+ cameraId).val(); 
+                        cameraEditObject = {
+                            'id':tshopId,
+                            'focal_length_tshop_max':edit_tshop_max,
+                            'focal_length_tshop_min':edit_tshop_min
+                        }
+                        cameraEditObjectList.push(tshopEditObject)
+                     }
+            }
+
             $.ajax({
                type : "PUT",
-               data : "width=" + width + "&_token= "+ token + "&categorie_id=" + categorie_id + "&manufacturerId=" + manufacturerId + "&camera_id=" + camera_id +"&sensor_id=" + sensor_id + "&height=" + height + "&diameter=" + diameter,
+               data : "camera_categorie=" + camera_categorie + "&_token= "+ token + "&camera_manufacturer=" + camera_manufacturer + "&camera_name=" + camera_name + "&camera_id=" + camera_id +"&sensor_id=" + sensor_id + "&height=" + height + "&diameter=" + diameter,
                url:"/smartfinder-plus/" + sensor_id,
                 success:function(data){
                     console.log(data);
                     sensorId = data.id;
                     var categorie_id = data.categorie_id
-                document.getElementById('sensorResult_2').innerHTML=data.value;
-                document.getElementById('sensorResult').innerHTML=data.value;
-                document.getElementById('sensorValueResult').innerHTML=data.value;
-                document.getElementById('sensorWidthResult').innerHTML=data.width;
-                document.getElementById('sensorHeightResult').innerHTML=data.height;
-                document.getElementById('sensorDaimeterResult').innerHTML=data.diameter; 
-                document.getElementById('width').value=data.width;
-                document.getElementById('height').value=data.height;
-                document.getElementById('diameter').value=data.diameter;
-                document.getElementById("editSensor").value = data.value;
-                document.getElementById("editwidth").value = data.width;
-                document.getElementById("editheight").value = data.height;
-                document.getElementById("editdiameter").value = data.diameter;
-                document.getElementById('reviewValue').innerHTML=data.value;
-                document.getElementById('reviewWidht').innerHTML=data.width;
-                document.getElementById('reviewHeight').innerHTML=data.height;
-                document.getElementById('reviewDaimeter').innerHTML=data.diameter; 
-                
                }
             });
         });
     });
 
-  function format (data) {
-    return '<div class="details-container">'+
-        '<table cellpadding="5" cellspacing="0" border="0" class="details-table">'+
-            '<tr class="inside">'+
-                  '<td class="c-data">'+data.s1_1+'</td>'+
-                  '<td class="c-data">'+'W'+ ' ' +data.s1_w+ ' '+ 'mm'+' </td>'+
-                  '<td class="c-data">'+'H'+ ' ' +data.s1_h+ ' '+ 'mm'+ '</td>'+
-                  '<td class="c-data">'+'D'+ ' '+data.s1_d+'</td>'+
-            '</tr>'+
-          
-            
-        '</table>'+
-      '</div>';
-};
 
-var table = $('.datatables_lens').DataTable({
-  // Column definitions
-  columns : [
-    {data : 'category'},
-    {data : 'manufacturer'},
-    {data : 'name'},
-    {
-      className      : 'details-control',
-      defaultContent : 'View Sensor Details',
-      data           : null,
-      orderable      : false
-    },
-    {
-      data: null,
-      render: function (data, type, row, meta) {
-        return `<div style="text-align: center"><a class="edit_details"  data-toggle="modal" data-target="#myModal" data-id="${data.id}" title="edit" >
-        Edit</a>
-        </div>`;
-        // return `<div style="text-align: center"><a href="" class="edit_details"  data-toggle="modal" data-target="#myModal" data-id="${data.id}" title="edit" >
-        // <img src="http://i.imgur.com/DHma3ln.png" alt="Edit" width=20px></a>
-        // <a href="" class="delete_details" data-id="${data.id}" title="delete" style="padding-left: 20px;">
-        // <img src="http://i.imgur.com/HNUCXDU.png" alt="Delete" width=20px></a></div>`;
-      }
-              } 
-  ],
-  
-  data : data,
-  
-  pagingType : 'full_numbers',
-  
-});
-
-$('.datatables_lens tbody').on('click', 'td.details-control', function () {
-   var tr  = $(this).closest('tr'),
-       row = table.row(tr);
-  
-   if (row.child.isShown()) {
-     tr.next('tr').removeClass('details-row');
-     row.child.hide();
-     tr.removeClass('shown');
-   }
-   else {
-     row.child(format(row.data())).show();
-     tr.next('tr').addClass('details-row');
-     tr.addClass('shown');
-   }
-});
-
-});
 </script>
 
 
-{{--     <script  src="{{asset('js/index.js')}}"></script> --}}
+
+{{-- Lens Script --}}
+<script>
+  
+$(document).ready(function() {
+    // Ajax call
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    var id= 0;
+    $('document').ready(function(){
+        $('.lensEditButton').click(function(){
+            var lens_edit_id = $(this).data("id");
+            $.ajax({
+                url: "/smartfinder-plus-lens-edit/"+ lens_edit_id,
+                data: {lens_edit_id: lens_edit_id},
+                method: "post",
+                success: function(data)
+                {
+                  $('#showLensModelData').html('');
+                  $('#showModelLensValueData').html('');
+                  console.log(data);
+                  var divNew = $(" <div class='col-md-12'><div class='row'><div class='col-md-4'><div class='form-group row'><label for='Manufacturer' class='col-sm-4 col-form-label font-weight-bold'>Manufacturer</label><div class='col-sm-8'><input type='name' id='camera_categorie' class='form-control border-td-0 col-md-10' value='"+data[0].manufactures[0].name+"' placeholder=''required></div></div></div><div class='col-md-4'><div class='form-group row'><label for='' class='col-sm-4 col-form-label font-weight-bold'>Series</label><div class='col-sm-8'><input type='name' id='series' value='"+data[0].name+"' class='form-control border-td-0 col-md-10' placeholder=''required></div></div></div></div></div>");
+                  $('#showLensModelData').append(divNew)
+                    var len = data.length;
+                   for( var i = 0; i<len; i++){
+                    var focalData = data[i].focal_lengths;
+                    for(var j = 0; j<focalData.length; j++){
+                        var focal_length = focalData[j].focal_length;
+                        var focal_length_value = focalData[j].focal_length_value;
+                        var focal_length_tshop_max = focalData[j].focal_length_tshop_max;
+                        var focal_length_tshop_min = focalData[j].focal_length_tshop_min;
+                         var lensDivNew2 = $("<div class='row ml-2'><div class='col-md-3'><div class='form-group flex'><input type='number' id='t-shop-min9'value='"+focal_length+"' class='form-control mx-sm-3 width-50'><label class='width-50'>mm </label></div></div> <div class='col-md-3'><div class='form-group flex'><label class='width-50 font-weight-bold'>[LiD]</label><input type='number' id='t-shop-max9' value='"+focal_length_value+"' class='form-control mx-sm-3 width-50'></div> </div> <div class='col-md-3'><div class='form-group flex'><label class='width-50'>Max Value </label><input type='number' id='t-shop-min9' class='form-control  mx-sm-3 width-50' value='"+focal_length_tshop_max+"'></div></div><div class='col-md-3'><div class='form-group flex'><label class='width-50'>Min Value </label><input type='number' value='"+focal_length_tshop_min+"' id='t-shop-min9' class='form-control mx-sm-3 width-50'></div></div></div>");
+                     $('#showModelLensValueData').append(lensDivNew2);
+                    }
+
+                   }
+                }
+            });
+        });
+    });
+
+
+  $('document').ready(function(){
+        $('#lenSave').click(function(){
+            var camera_categorie = $("#camera_categorie").val();
+            var camera_manufacturer = $("#camera_manufacturer").val();
+            var camera_name  = $("#camera_name").val();
+            var id = id;
+           console.log(cameraEditAllDataArray);
+            var count = $('#showModelWidthData .row').length;
+    
+                   cameraEditObjectList = [];
+                   if(count > 0){
+                     for( var j = 0; j<count; j++){
+                        
+                        cameraId = cameraEditAllData[j]['id'];
+                        var camera_value = $('#camera_value'+ cameraId).val(); 
+                        var edit_tshop_min = $('#edit_tshopmin'+ cameraId).val(); 
+                        cameraEditObject = {
+                            'id':tshopId,
+                            'focal_length_tshop_max':edit_tshop_max,
+                            'focal_length_tshop_min':edit_tshop_min
+                        }
+                        cameraEditObjectList.push(tshopEditObject)
+                     }
+            }
+
+            $.ajax({
+               type : "PUT",
+               data : "camera_categorie=" + camera_categorie + "&_token= "+ token + "&camera_manufacturer=" + camera_manufacturer + "&camera_name=" + camera_name + "&camera_id=" + camera_id +"&sensor_id=" + sensor_id + "&height=" + height + "&diameter=" + diameter,
+               url:"/smartfinder-plus/" + sensor_id,
+                success:function(data){
+                    console.log(data);
+                    sensorId = data.id;
+                    var categorie_id = data.categorie_id
+               }
+            });
+        });
+    });
+  
+});
+</script>
 @endsection

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CameraController extends Controller
 {
+	 public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function addCamera(Request $request)
     {
     	$camera = new camera;
