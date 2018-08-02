@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\apiversion;
 use App\focalLength;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,8 @@ class FocalLengthController extends Controller
         $this->middleware('auth');
     }
     public function addFocalLength(Request $request, $id){
+    		
+    		apiversion::find(1)->increment('version');
   			$array = array();
 			$focalLength =$request->focal_length;
 			$focalLengths = explode(",",$focalLength);
@@ -20,7 +23,7 @@ class FocalLengthController extends Controller
 				$focal = new focalLength;
 				$focal->focal_length = $focalLength;
 				$focal->categorie_id = $request->categorie_id;
-		    	$focal->manufacturer_id = $request->manufacturerId;
+		    	$focal->lens_manufacturer_id = $request->manufacturerId;
 		    	$focal->series_id = $request->series_id;
 		    	$focal->save();
 		    	array_push($array, $focal);
@@ -31,6 +34,7 @@ class FocalLengthController extends Controller
 
     public function editFocalLength(Request $request, $id)
 	{
+		apiversion::find(1)->increment('version');
 		$array = array();
 		$focalLengthData = $request->focal_obj;
 		$focalLengths =	json_decode($focalLengthData);
@@ -46,6 +50,7 @@ class FocalLengthController extends Controller
 
 	public function addFocalLengthValue(Request $request, $id)
 	{
+		apiversion::find(1)->increment('version');
 		$array = array();
 		$focalLengthValueData = $request->focal_length_value;
 		$focalLengthValues =	json_decode($focalLengthValueData);
@@ -61,7 +66,7 @@ class FocalLengthController extends Controller
 	}	
 	public function editFocalLengthValue(Request $request, $id)
 	{
-
+		apiversion::find(1)->increment('version');
 		$array = array();
 		$focalLengthValueEditData = $request->focal_length_edit_value;
 		$focalLengthEditValues = json_decode($focalLengthValueEditData);
@@ -78,6 +83,7 @@ class FocalLengthController extends Controller
 
 	public function addTshop(Request $request, $id)
 	{
+		apiversion::find(1)->increment('version');
 		$array = array();
 		$tshopData = $request->focal_length_tshop;
 		$tshopValueDatas = json_decode($tshopData);
@@ -95,7 +101,7 @@ class FocalLengthController extends Controller
 
 	public function editTshop(Request $request, $id)
 	{
-
+		apiversion::find(1)->increment('version');
 		$array = array();
 		$tshopEditData = $request->focal_length_edit_tshop;
 		$tshopEditValueDatas = json_decode($tshopEditData);
@@ -114,7 +120,7 @@ class FocalLengthController extends Controller
 	public function reviewData($id)
 	{
 	 	$lensReviewDatas = DB::table('focal_lengths')
-		                ->join('manufacturers','focal_lengths.manufacturer_id', '=','manufacturers.id')
+		                ->join('lens_manufacturers','focal_lengths.lens_manufacturer_id', '=','lens_manufacturers.id')
 		                ->where('series_id', $id)
 		                ->get();
 		return $lensReviewDatas;            

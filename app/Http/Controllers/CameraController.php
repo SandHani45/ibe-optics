@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sensor;
+use App\apiversion;
 use App\camera;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class CameraController extends Controller
     
     public function addCamera(Request $request)
     {
+    	apiversion::find(1)->increment('version');
     	$camera = new camera;
 		$camera->categorie_id = $request->categorie_id;
 		$camera->manufacturer_id = $request->manufacturerId;
@@ -25,6 +27,7 @@ class CameraController extends Controller
 
     public function Edit(Request $request, $id)
 	{
+		apiversion::find(1)->increment('version');
 		$camera = camera::find($id);
 		$camera->name = $request->cameraname;
 	    $camera->update();

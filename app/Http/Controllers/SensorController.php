@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Sensor;
+use App\apiversion;
+use App\camera;
 use Illuminate\Http\Request;
 
 class SensorController extends Controller
@@ -14,20 +16,20 @@ class SensorController extends Controller
     
    public function addSensor(Request $request)
 	{
-		// return $request;
-			$array = array();
-			$valueData =$request->value;
-			$values = explode(",",$valueData);
-			foreach ($values as $value) {
-				$sensor = new Sensor;
-				$sensor->categorie_id = $request->categorie_id;
-				$sensor->camera_id = $request->camera_id  ;
-		    	$sensor->manufacturer_id = $request->manufacturerId;
-		    	$sensor->value = $value;
-		    	$sensor->save();
-		    	array_push($array, $sensor);
-			}
-	    	return $array;
+		apiversion::find(1)->increment('version');
+		$array = array();
+		$valueData =$request->value;
+		$values = explode(",",$valueData);
+		foreach ($values as $value) {
+			$sensor = new Sensor;
+			$sensor->categorie_id = $request->categorie_id;
+			$sensor->camera_id = $request->camera_id  ;
+	    	$sensor->manufacturer_id = $request->manufacturerId;
+	    	$sensor->value = $value;
+	    	$sensor->save();
+	    	array_push($array, $sensor);
+		}
+	    return $array;
 	}
 		
 
@@ -59,7 +61,8 @@ class SensorController extends Controller
 											->first();
 			$widthDataResult->width = $widthUpdate->width;
 			$widthDataResult->height = $widthUpdate->height;
-			$widthDataResult->diameter = $widthUpdate->diameter;
+			$widthDataResult->res_width = $widthUpdate->res_width;
+			$widthDataResult->res_height = $widthUpdate->res_height;
 			$widthDataResult->update();
 			array_push($array, $widthDataResult);
 		}
@@ -98,7 +101,8 @@ class SensorController extends Controller
 											->first();
 			$widthFinalDataResult->width = $editFianlValueData->width;
 			$widthFinalDataResult->height = $editFianlValueData->height;
-			$widthFinalDataResult->diameter = $editFianlValueData->diameter;
+			$widthFinalDataResult->res_width = $editFianlValueData->res_width;
+			$widthFinalDataResult->res_height = $editFianlValueData->res_height;
 			$widthFinalDataResult->update();
 			array_push($array, $widthFinalDataResult);
 		}
@@ -115,9 +119,12 @@ class SensorController extends Controller
 		return $sensor;
 	}
 
-	public function Review(Request $request, $id){
-		$review = Sensor::with('categories')
-						->get();
-		return $review;							
+	public function review(Request $request, $id){
+
+		$camera_datas = camera::with('categories','manufacturers','sensors')
+								->where('id', $id)
+								->get();
+		return $camera_datas;
+
 	} 
 }

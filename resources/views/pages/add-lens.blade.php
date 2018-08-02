@@ -9,7 +9,7 @@
      /* #selectShowManuTwo{
       	display: block;
       }*/
-      #reactButton > button{
+    #reactButton > button{
   	    background: #d10a11;
 		color: #fff;
       	float: right;
@@ -20,6 +20,9 @@
 	    border-top-right-radius: 16px;
 	    padding: 3px 37px 4px 37px!important;
       }
+    table tr {
+        border-bottom: none!important;
+    }
 </style>
 
 @endsection
@@ -383,13 +386,13 @@
                 </div>     
             </div>
 
-             <!-- FOCAL LENGTH VALUES                -->
+             <!-- add adapter                -->
             <div class="tab mb-2" id="selectShowManuFour">
                 <div class="add_hide" id="add_hideFive">
                     <div class="row bg-top">
                         <div class="col-md-12">
                             <div class="bg-top ">
-                                <p class="heade-title ml-3">FOCAL LENGTH VALUES</p>
+                                <p class="heade-title ml-3">ADD ADAPTER VALUES</p>
                             </div>
                         </div>
                     </div>
@@ -426,7 +429,7 @@
                     <div class="row bg-top">
                         <div class="col-md-12">
                             <div class="row bg-top">
-                                <p class="heade-title ml-3 col-md-8"> FOCAL LENGTH VALUES</p>
+                                <p class="heade-title ml-3 col-md-8"> ADD ADAPTER VALUES</p>
                                 <p class="title-edit col-md-3"><a  class="float-right edit-color " data-toggle="modal" data-target="#focalLengthValueModal" data-whatever="@mdo" href="">Edit</a></p> 
                             </div>
                         </div>
@@ -440,7 +443,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">EDIT FOCAL LENGTH VALUE</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">EDIT ADD ADAPTER VALUES</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
@@ -705,7 +708,7 @@ $('document').ready(function(){
                 for( var i = 0; i<len; i++){
                     var id = data[i]['id'];
                     var name = data[i]['name'];
-                    var manufactures = data[i]['manufactures'];
+                    var manufactures = data[i]['lens_manufactures'];
                     for (j = 0; j<manufactures.length; j++){
                         var name = manufactures[j]['name'];
                         var id = manufactures[j]['id'];
@@ -736,7 +739,7 @@ $('document').ready(function(){
             $.ajax({
                type : "POST",
                data : "manufacturer=" + manufacturer + "&_token= "+ token + "&categorie_id=" + categorie_id,
-               url:"/add-manufacturer",
+               url:"/add-lens-manufacturer",
                 success:function(data){
                     console.log(data);
                     categorieId = data.categorie_id;
@@ -747,6 +750,7 @@ $('document').ready(function(){
             });
         });
     }); 
+
 //edit manufacturer
     $('document').ready(function(){
         $('#editSetpTwo').click(function(){
@@ -756,7 +760,7 @@ $('document').ready(function(){
             $.ajax({
                type : "POST",
                data : "manufacturer=" + manufacturer + "&_token= "+ token,
-               url:"/add-manufacturer/" + manufacturerId,
+               url:"/edit-lens-manufacturer/" + manufacturerId,
                 success:function(data){
                     console.log(data);
                     categorieId = data.categorie_id;
@@ -824,8 +828,8 @@ $('document').ready(function(){
                 success:function(data){
                     console.log(data);
                     categorieId = data.categorie_id;
-                    manufacturerId = data.manufacturer_id;
-                    serie_id  = data.id;
+                    manufacturerId = data.lens_manufacturer_id;
+                    series_id  = data.id;
                     document.getElementById('seriesResult').innerHTML=data.name;  
                     document.getElementById('editSeries').value=data.name;  
                }
@@ -839,6 +843,7 @@ $('document').ready(function(){
         var editSeries = $("#editSeries").val();
         var token  = $("#token").val();
         var seriesId  = series_id;
+        console.log(seriesId);
         $.ajax({
            type : "POST",
            data : "editSeries=" + editSeries + "&_token= "+ token ,
@@ -846,17 +851,18 @@ $('document').ready(function(){
             success:function(data){
                 console.log(data);
                 categorieId = data.categorie_id;
-                manufacturerId = data.manufacturer_id;
+                manufacturerId = data.lens_manufacturer_id;
                 cameraId = data.id;
                 document.getElementById('seriesResult').innerHTML=data.name;  
                 document.getElementById('editSeries').value=data.name;    
             }
         });
     });
-});
+}); 
+
 // get id selectLensSeries
 var focal_length_data = '';
-var serie_id = 0;
+
 $('document').ready(function(){
     $("#selectLensSeries").change(function() {
         var selectLensSeries_id = $(this).val();
@@ -867,10 +873,11 @@ $('document').ready(function(){
             success: function(data){
                 console.log(data);
                 sensor_data = data.name;
-                serie_id = data[0].id;
+                series_id = data[0].id;
+                console.log(series_id)
                 console.log(data[0].id);
                 categorieId = data[0].categorie_id;
-                manufacturerId = data[0].manufacturer_id;
+                manufacturerId = data[0].lens_manufacturer_id;
                     
                 document.getElementById('seriesResult').innerHTML=data[0].name;
                 document.getElementById("editSeries").value = data[0].name;
@@ -897,7 +904,7 @@ var serie_id = 0;
 var EditFocalLengthData = null;
 $('document').ready(function(){
     $('#sendFocalLength').click(function(){
-        serie_id  = serie_id;
+        serie_id  = series_id;
         categorie_id = categorieId;
         manufacturerId = manufacturerId;
         value_array = []
@@ -908,26 +915,23 @@ $('document').ready(function(){
            for(var i = 1; i <= count; i++ )
            {
             if(i === 1){
-                // alert('#focal_length['+i+']')
-               //var value = $('#focal_length[1]').val();   
                var value = $('input[name="focal_length"]' ).val();
-               
+               if(value === ''){
+                    alert ('please fill the required fields');
+                    return;
+                }
 
             }else{
                 var value = $('#focal_length'+ i).val();
-                
+                if(value === ''){
+                    alert ('please fill the required fields');
+                    return;
+                }
             }
-             if($('#focal_length'+ i).val() === ''){
-                alert('Input can not be left blank');
-                return ;
+             value_array.push(value)
            }
-            //var value = $('input[name="focal_length"]' ).val();
-            value_array.push(value)
-           }
-          
-
         }
-       
+          
         var length_value = value_array.length ;
 
         document.getElementById('selectShowManuFour').style.display = "block";
@@ -937,7 +941,7 @@ $('document').ready(function(){
         $.ajax({
             type : "POST",
             data : "focal_length=" + value_array + "&categorie_id=" + categorie_id + "&manufacturerId=" + manufacturerId + "&series_id=" + serie_id,
-            url:"/add-focal-length/" + serie_id,
+            url:"/add-focal-length/" + series_id,
                 success:function(data){
                 console.log(data);
                 var len = data.length;
@@ -991,7 +995,7 @@ $('document').ready(function(){
         $.ajax({
             type : "PUT",
             data:"focal_obj="+JSON.stringify(focalObjectList),
-            url:"/edit-focal-length/" + serie_id,
+            url:"/edit-focal-length/" + series_id ,
             success:function(data){
                 console.log(data);
                  $("#focalLengthResult").html(""); 
@@ -1260,9 +1264,6 @@ $('document').ready(function(){
         });
     });
 });
-
-
-
 
 </script>
 

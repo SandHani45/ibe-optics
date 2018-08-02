@@ -127,15 +127,12 @@ text-decoration: unset;
 .table-hover tbody tr {
     background-color: rgba(0,0,0,.075);
 }
-table tr{
+/*table tr{
     border-bottom: 7px solid white;
-}
+}*/
 .add{
     width: 100%;
-    padding-bottom: 18px;
-    margin-left: 10px;
-    margin-right: 25px;
-    margin-top: 31px;
+    margin: 30px 25px 10px 25px;
 
 }
 .btn-f:focus, .btn-f:focus {
@@ -270,8 +267,10 @@ table.dataTable {
     border-spacing: 0;
 }
 .c-data{
-    padding-right: 48px!important;
-    border-top: 1px solid #f2f2f2!important;
+    
+    padding: 5px 0px !important;
+    width: 125px;
+   /* border-top: 1px solid #f2f2f2!important;*/
 }
 /* End Table css */
 
@@ -536,4 +535,104 @@ table.dataTable thead .sorting_desc {
 }
 .width-50{
   width: 50%;
+}
+.btn-ibe{
+      color: #fff;
+    background-color: #d32027!important;
+    border-color: #d32027!important;
+}
+.btn-link-ibe{
+      font-weight: 400;
+    color: #d32027;
+    background-color: transparent;
+}
+.btn-link-ibe:hover{
+      font-weight: 400;
+    color: #d32027;
+    background-color: transparent;
+}
+.login-button{
+    width: 160px;
+    padding: 10px;
+    border-radius: 0;
+    color: #fff;
+    background-color: #1f629b;
+    border-color: #1f629b;
+}
+.br-0{
+    border-radius: 0!important;
+}
+.box-pd{
+    padding: 0.695rem .75rem!important;
+}
+.font-22{
+    font-size: 22px!important;
+}
+.color{
+        color: #000000!important;
+}
+
+
+
+
+/*table css*/
+
+/*table { 
+  width: 750px; 
+  border-collapse: collapse; 
+  margin:50px auto;
+  }
+
+th { 
+  background: #3498db; 
+  color: white; 
+  font-weight: bold; 
+  }
+
+td, th { 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  text-align: left; 
+  font-size: 18px;
+  }
+
+.labels tr td {
+  background-color: #2cc16a;
+  font-weight: bold;
+  color: #fff;
+}
+*/
+.label tr td label {
+  display: none;
+}
+
+
+[data-toggle="toggle"] {
+  display: none;
+}
+#oldSensorData{
+      margin-left: 3px;
+    margin-right: 35px;
+    padding-bottom: 22px;
+}
+.clr-bg{
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.clr{
+      color: #007bff!important;
+}
+.c-data-lens{
+    padding: 5px 0px !important;
+    width: 185px;
+   /* border-top: 1px solid #f2f2f2!important;*/
+}
+.ml-18{
+        margin-left: 18px;
+}
+
+.align-item{
+        display: flex;
+    align-items: center;
 }

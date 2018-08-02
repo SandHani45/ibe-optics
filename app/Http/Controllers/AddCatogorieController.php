@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
+use App\apiversion;
 use App\categorie;
 use App\manufacturer;
 use Illuminate\Http\Request;
-use Alert;
 class AddCatogorieController extends Controller
 {
 	 public function __construct()
@@ -15,8 +16,10 @@ class AddCatogorieController extends Controller
     
     public function addCategorie(Request $request)
     {
+    
     	$categorie_verify = categorie::where('name', $request->c_type)
-                    	  ->first();
+                    	  ->first();           
+		apiversion::find(1)->increment('version');
 		if(!$categorie_verify){
 			$categorie = new categorie;
 	    	$categorie->name = $request->c_type;
@@ -24,14 +27,15 @@ class AddCatogorieController extends Controller
 	    	return $categorie;
 	    } 
     }
-    public function Edit(Request $request, $id)
+    public function Edit(Request $request, $id) 
 	{
+		apiversion::find(1)->increment('version');
 		$categorie = categorie::find($id);
 		$categorie->name = $request->c_type;
 		$categorie->update();
 		return $categorie;
 	}
-	public function GetData(Request $request, $id)
+	public function getCameraManuData(Request $request, $id)
 	{
 	
 		$manufactures = categorie::with('manufactures')
@@ -41,7 +45,20 @@ class AddCatogorieController extends Controller
 			$categorie = categorie::find($id);
 			return $categorie;
 		}
-		
+		return $manufactures;
+
+	}
+
+	public function getData(Request $request, $id)
+	{
+	
+		$manufactures = categorie::with('lensManufactures')
+									->Orwhere('id',$id)
+									->get();
+		if( empty($manufactures)){
+			$categorie = categorie::find($id);
+			return $categorie;
+		}
 		return $manufactures;
 
 	}

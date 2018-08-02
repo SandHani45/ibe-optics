@@ -13,9 +13,9 @@
             <!-- Authentication Links -->
               @guest
             <li class="nav-item active">
-              <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}
+            {{--   <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}
                 <span class="sr-only">(current)</span>
-              </a>
+              </a> --}}
             </li>
             @else
             <li class="nav-item header-plus active smart-finder-plus">

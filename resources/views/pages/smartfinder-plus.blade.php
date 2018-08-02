@@ -11,6 +11,12 @@
       .smart-finder-pro{
         display: none;
       }
+      .table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: none;
+    font-weight: 400;
+}
     </style>
 @endsection
 @section('content')
@@ -62,7 +68,7 @@
                                 <div class="col-md-12 mt-5">
                                     <div class="row">
                                         <div class="col-md-7 ml-5">
-                                            <button id="save_change" class="update-button btn btn-red radius-50 add-another">Save Changes</button>
+                                            <button id="save_change" onClick="window.location.reload()" class="update-button btn btn-red radius-50 add-another">Save Changes</button>
                                         </div>
                                         
                                     </div>
@@ -88,44 +94,48 @@
                           <th></th>
                         </tr>
                       </thead>
-                      <tbody>
-                          @foreach ($camera_datas as $camera)
-
-                            <tr role="row" class="odd">
- 
+                      <tbody style="border-top: 5px solid #fff;">
+                        @foreach ($camera_datas as $camera)
+                        <tbody>
+                            <tr role="row" class="odd" style=" border-top: 6px solid #fff;">
                                 <td>{{$camera->categories['name']}}</td>
+                                <td >{{$camera->manufacturers['name']}}</td>
                                 <td>{{$camera->name}}</td>
                                
-                                    <td >{{$camera->manufacturers['name']}}</td>
-                                
-                                
-                                <td class="details-control" onclick="myFunction()">View Sensor Details</td>
+                                <td >
+                                    <label class="clr-bg" for="{{$camera->name}}">View Sensor Details</label>
+                                    <input type="checkbox" name="{{$camera->name}}" id="{{$camera->name}}" data-toggle="toggle">
+                                </td>
                                 <td>
-                                    <div style="text-align: center" data-id="{{$camera->id}}" class="ajax_edit"><a href=""  data-toggle="modal" data-target="#cameraModel" title="edit">
+                                    <div style="text-align: center" data-id="{{$camera->id}}" class="ajax_edit"><a href="" class="clr" data-toggle="modal" data-target="#cameraModel" title="edit">
                                         Edit</a>
                                     </div>
                                 </td>
                             </tr>
-                             @foreach ($camera->sensors as $sensor)
-                                <tr class="details-row"  id="myDIV">
-                                    <td colspan="5">
-                                        <div class="details-container">
-                                            <table cellpadding="5" cellspacing="0" border="0" class="details-table">
-                                                <tbody class="row">
-                                                    <tr class="inside">
-                                                        <td class="c-data">{{$sensor->id}}</td>
-                                                        <td class="c-data">W {{$sensor->id}} mm </td>
-                                                        <td class="c-data">H {{$sensor->id}} mm</td>
-                                                        <td class="c-data">D {{$sensor->id}}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach 
+                           </tbody> 
+                                <tbody class="hide" style="display: none;">
+                                     @foreach ($camera->sensors as $sensor)
+                                    <tr class="details-row" style="border-bottom:none;">
+                                        <td colspan="5" style="padding: 0;">
+                                            <div class="details-container">
+                                                <table cellpadding="5" cellspacing="0" border="0" class="details-table">
+                                                    <tbody class="row">
+                                                        <tr class="inside">
+                                                            <td class="c-data">{{$sensor->value}}</td>
+                                                            <td class="c-data">W {{$sensor->width}} mm </td>
+                                                            <td class="c-data">H {{$sensor->height}} mm</td>
+                                                            <td class="c-data">PX {{$sensor->res_width}}</td>
+                                                            <td class="c-data">PX {{$sensor->res_height}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach 
+                            </tbody>
                             @endforeach
-                      </tbody>
+                     </tbody>
                     </table>
                 </div>
           
@@ -160,7 +170,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="txtName" class="control-label col-md-4 font-weight-bold">Sensor Mode </label>
+                                        <label for="txtName" class="control-label col-md-4 font-weight-bold">Focal length & T-stop Values </label>
                                     </div>
                                      <div class="col-md-12">
                                         <div class="row" id="showModelLensValueData">
@@ -190,36 +200,42 @@
                           <th>Series</th>
                           <th></th>
                           <th></th>
-                          <th></th>
+                          
                           
                         </tr>
                       </thead>
-                      <tbody>
+                     <tbody  style="border-top: 5px solid #fff;">
                          @foreach ($lensdatas as $lensData)
-
-                            <tr role="row" class="odd">
-                                @foreach ($lensData->manufactures as $manufacture)
-                                    <td >{{$manufacture->name}}</td>
+                        <tbody>
+                            <tr role="row" class="odd" style=" border-top: 6px solid #fff;">
+                                @foreach ($lensData->lensManufactures as $lensManufacture)
+                                    <td >{{$lensManufacture->name}}</td>
                                 @endforeach
                                 <td>{{$lensData->name}}</td>
-                                <td class="details-control" onclick="myFunction()">View Sensor Details</td>
+                                 <td >
+                                    <label for="{{$lensData->name}}" class="clr-bg">View Focal length & T-stop Values Details</label>
+                                    <input type="checkbox" name="{{$lensData->name}}" id="{{$lensData->name}}" data-toggle="toggle">
+                                </td>
                                 <td>
-                                    <div style="text-align: center" data-id="{{$lensData->id}}" class="lensEditButton"><a href=""  data-toggle="modal" data-target="#lensModel" title="edit">
+                                    <div style="text-align: center" data-id="{{$lensData->id}}" class="lensEditButton"><a href="" class="clr" data-toggle="modal" data-target="#lensModel" title="edit">
                                         Edit</a>
                                     </div>
                                 </td>
                             </tr>
+                        </tbody>
+                         <tbody class="hide" style="display: none;">
                              @foreach ($lensData->focalLengths as $focalLength)
-                                <tr class="details-row"  id="myDIV">
-                                    <td colspan="5">
+
+                                <tr class="details-row" style="border-bottom:none;">
+                                    <td colspan="5" style="padding: 0;">
                                         <div class="details-container">
                                             <table cellpadding="5" cellspacing="0" border="0" class="details-table">
                                                 <tbody class="row">
                                                     <tr class="inside">
-                                                        <td class="c-data">{{$focalLength->focal_length}} mm</td>
-                                                        <td class="c-data">Lens image diameter [Lid] {{$focalLength->focal_length_value}}  </td>
-                                                        <td class="c-data">Max Value T {{$focalLength->focal_length_tshop_max}} </td>
-                                                        <td class="c-data">Min Value T {{$focalLength->focal_length_tshop_min}}</td>
+                                                        <td class="c-data-lens" >{{$focalLength->focal_length}} mm</td>
+                                                        <td class="c-data-lens" > Adapter Value {{$focalLength->focal_length_value}}  </td>
+                                                        <td class="c-data-lens">Max Value T {{$focalLength->focal_length_tshop_max}} </td>
+                                                        <td class="c-data-lens" >Min Value T {{$focalLength->focal_length_tshop_min}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -227,6 +243,7 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            </tbody>
                             @endforeach
                       </tbody>
                     </table>
@@ -236,9 +253,14 @@
     </section>
 @endsection
 
-@section('script')
+@section('script') 
+    <!-- table script -->
 <script>
-
+$(document).ready(function() {
+    $('[data-toggle="toggle"]').change(function(){
+        $(this).parents().next('.hide').toggle();
+    });
+});
 </script>
 
  <script>
@@ -260,19 +282,8 @@
         document.getElementById("defaultOpen").click();
     </script>
 
-    <!-- table script -->
-   <script>
-        function myFunction() {
-            var x = document.getElementById("myDIV");
-            if (x.style.display === "none") {
-                x.style.display = "";
-            } else {
-                x.style.display = "none";
-            }
-        }
-   </script>
-{{-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
- --}}
+
+
 <script>
 
 // Ajax call
@@ -283,7 +294,9 @@ $.ajaxSetup({
 });
 
   var id= 0;
+  var sensors = '';
   var cameraEditAllDataArray = [];
+  var cameraEditAllData = '';
    $('document').ready(function(){
       $('.ajax_edit').click(function(){
         var edit_id = $(this).data("id");
@@ -297,6 +310,7 @@ $.ajaxSetup({
               $('#showModelWidthData').html(' ');
               console.log(data[0].name);
               console.log(data);
+              cameraEditAllData = data;
               console.log(data[0].manufacturers.name);
               
               var divNew = $(" <div class='col-md-12'><div class='row'><div class='col-md-4'><div class='form-group row'><label for='Categorie' class='col-sm-4 col-form-label font-weight-bold'>Categorie</label><div class='col-sm-8'><input type='name' id='camera_categorie' class='form-control border-td-0 col-md-10' value='"+data[0].categories.name+"' placeholder=''required></div></div></div><div class='col-md-4'><div class='form-group row'><label for='' class='col-sm-4 col-form-label font-weight-bold'>Manufacturer</label><div class='col-sm-8'><input type='name' id='camera_manufacturer' value='"+data[0].manufacturers.name+"' class='form-control border-td-0 col-md-10' placeholder=''required></div></div></div><div class='col-md-4'><div class='form-group row'><label for='' class='col-sm-4 col-form-label font-weight-bold'>Name</label><div class='col-sm-8'><input type='name' id='camera_name' class='form-control border-td-0' value='"+data[0].name+"'  placeholder=''required></div></div></div></div></div>");
@@ -304,18 +318,18 @@ $.ajaxSetup({
                 $('#showModelData').append(divNew)
 
                 for( var i = 0; i<len; i++){
-                    var sensors = data[i].sensors;
+                     sensors = data[i].sensors;
                     for(var j = 0; j<sensors.length; j++){
                         var value = sensors[j].value;
                         var width = sensors[j].width;
                         var height = sensors[j].height;
-                        var diameter = sensors[j].diameter;
+                        var res_width = sensors[j].res_width;
+                        var res_height = sensors[j].res_height;
                         var id = sensors[j].id;
-                        cameraEditAllData = sensors[j].id;
-                        console.log(diameter)
-                    var divNew2 = $("<div class='row ml-2'><div class='col-md-3'><div class='row'><input type='number' id='camera_value"+id+"' class='form-control border-td-0 col-md-8' value='"+value+"'  placeholder='' required></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> <p class=''>W</p></div><input type='number' id='camera_width"+id+"' value='"+width+"' class='form-control border-td-0 col-md-6' required><div class='col-md-2'><p class=''>mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> <p >H</p></div><input type='number' id='camera_height"+id+"' value='"+height+"' class='form-control border-td-0 col-md-6' placeholder='' required><div class='col-md-2'><p>mm</p></div></div></div><div class='col-md-3'><div class='row'><div class='col-md-2'> <p>D</p></div><input type='number' value='"+diameter+"'  id='camera_diameter"+id+"' class='form-control border-td-0 col-md-6' placeholder='' required><div ><p >mm</p></div></div></div></div>");
+                        // cameraEditAllData = sensors[j].id;
+                    var divNew2 = $("<div class='row data-len ml-2'><div class='col'><div class='row'><input type='number' id='camera_value"+id+"' class='form-control border-td-0 col-md-8' value='"+value+"'  placeholder='' required></div></div><div class='col'><div class='row'><div class='col-md-2 align-item'> <p class='mb-0'>W</p></div><input type='number' id='camera_width"+id+"' value='"+width+"' class='form-control border-td-0 col-md-6' required><div class='col-md-2 align-item'><p class='mb-0'>mm</p></div></div></div><div class='col'><div class='row'><div class='col-md-2 align-item'> <p class='mb-0'>H</p></div><input type='number' id='camera_height"+id+"' value='"+height+"' class='form-control border-td-0 col-md-6' placeholder='' required><div class='col-md-2 align-item'><p class='mb-0'>mm</p></div></div></div><div class='col'><div class='row'><div class='col-md-2 align-item'> <p class='mb-0'>W</p></div><input type='number' value='"+res_width+"'  id='res_width"+id+"' class='form-control border-td-0 col-md-6' placeholder='' required><div class='col-md-2 align-item' ><p class='mb-0' >px</p></div></div></div><div class='col'><div class='row'><div class='col-md-2 align-item'> <p class='mb-0'>H</p></div><input type='number' value='"+res_height+"'  id='res_height"+id+"' class='form-control border-td-0 col-md-6' placeholder='' required><div class='col-md-2 align-item'><p class='mb-0'>px</p></div></div></div></div>");
                     $('#showModelWidthData').append(divNew2);
-                    cameraEditAllDataArray.push(cameraEditAllData);
+                   
                 }
                }
             }
@@ -323,60 +337,54 @@ $.ajaxSetup({
     });
 });
    
+   // edit Camera Data
    $('document').ready(function(){
         $('#save_change').click(function(){
             var camera_categorie = $("#camera_categorie").val();
             var camera_manufacturer = $("#camera_manufacturer").val();
             var camera_name  = $("#camera_name").val();
-            var id = id;
-           console.log(cameraEditAllDataArray);
-            var count = $('#showModelWidthData .row').length;
-    
-                   cameraEditObjectList = [];
-                   if(count > 0){
-                     for( var j = 0; j<count; j++){
-                        
-                        cameraId = cameraEditAllData[j]['id'];
-                        var camera_value = $('#camera_value'+ cameraId).val(); 
-                        var edit_tshop_min = $('#edit_tshopmin'+ cameraId).val(); 
-                        cameraEditObject = {
-                            'id':tshopId,
-                            'focal_length_tshop_max':edit_tshop_max,
-                            'focal_length_tshop_min':edit_tshop_min
-                        }
-                        cameraEditObjectList.push(tshopEditObject)
-                     }
-            }
+            var id = cameraEditAllData[0].id;
+
+            var save_count = $('#showModelWidthData .data-len').length;
+                cameraEditObjectList = [];
+                if(save_count > 0){
+                    sensors = sensors;
+                    for(var k= 0; k <sensors.length; k++){
+                      cameraId = sensors[k].id;
+                      var camera_value = $('#camera_value'+ cameraId).val(); 
+                      var camera_width = $('#camera_width'+ cameraId).val(); 
+                      var camera_height = $('#camera_height'+ cameraId).val(); 
+                      var camera_res_width = $('#res_width'+ cameraId).val(); 
+                      var camera_res_height = $('#res_height'+ cameraId).val(); 
+                      cameraEditObject = {
+                          'id':cameraId,
+                          'camera_value':camera_value,
+                          'camera_width':camera_width,
+                          'camera_height':camera_height,
+                          'camera_res_width':camera_res_width, 
+                          'camera_res_height':camera_res_height, 
+                      }
+                    cameraEditObjectList.push(cameraEditObject)
+                    }
+                }
 
             $.ajax({
                type : "PUT",
-               data : "camera_categorie=" + camera_categorie + "&_token= "+ token + "&camera_manufacturer=" + camera_manufacturer + "&camera_name=" + camera_name + "&camera_id=" + camera_id +"&sensor_id=" + sensor_id + "&height=" + height + "&diameter=" + diameter,
-               url:"/smartfinder-plus/" + sensor_id,
+               data : "camera_categorie=" + camera_categorie  + "&camera_manufacturer=" + camera_manufacturer + "&camera_name=" + camera_name + "&id=" + id +"&cameraEditObject=" + JSON.stringify(cameraEditObjectList),
+               url:"/smartfinder-plus/" + id,
                 success:function(data){
                     console.log(data);
-                    sensorId = data.id;
-                    var categorie_id = data.categorie_id
+                   
                }
             });
         });
     });
 
 
-</script>
-
-
-
 {{-- Lens Script --}}
-<script>
-  
-$(document).ready(function() {
-    // Ajax call
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
     var id= 0;
+    var lensDataId = '';
+    var focalData = '';
     $('document').ready(function(){
         $('.lensEditButton').click(function(){
             var lens_edit_id = $(this).data("id");
@@ -389,65 +397,68 @@ $(document).ready(function() {
                   $('#showLensModelData').html('');
                   $('#showModelLensValueData').html('');
                   console.log(data);
-                  var divNew = $(" <div class='col-md-12'><div class='row'><div class='col-md-4'><div class='form-group row'><label for='Manufacturer' class='col-sm-4 col-form-label font-weight-bold'>Manufacturer</label><div class='col-sm-8'><input type='name' id='camera_categorie' class='form-control border-td-0 col-md-10' value='"+data[0].manufactures[0].name+"' placeholder=''required></div></div></div><div class='col-md-4'><div class='form-group row'><label for='' class='col-sm-4 col-form-label font-weight-bold'>Series</label><div class='col-sm-8'><input type='name' id='series' value='"+data[0].name+"' class='form-control border-td-0 col-md-10' placeholder=''required></div></div></div></div></div>");
+                  lensDataId = data;
+                  var divNew = $(" <div class='col-md-12'><div class='row'><div class='col-md-4'><div class='form-group row'><label for='Manufacturer' class='col-sm-4 col-form-label font-weight-bold'>Manufacturer</label><div class='col-sm-8'><input type='name' id='manufactures' class='form-control border-td-0 col-md-10' value='"+data[0].manufactures[0].name+"' placeholder=''required></div></div></div><div class='col-md-4'><div class='form-group row'><label for='' class='col-sm-4 col-form-label font-weight-bold'>Series</label><div class='col-sm-8'><input type='name' id='series' value='"+data[0].name+"' class='form-control border-td-0 col-md-10' placeholder=''required></div></div></div></div></div>");
                   $('#showLensModelData').append(divNew)
                     var len = data.length;
                    for( var i = 0; i<len; i++){
-                    var focalData = data[i].focal_lengths;
+                     focalData = data[i].focal_lengths;
                     for(var j = 0; j<focalData.length; j++){
                         var focal_length = focalData[j].focal_length;
+                        var focal_length_id = focalData[j].id;
                         var focal_length_value = focalData[j].focal_length_value;
                         var focal_length_tshop_max = focalData[j].focal_length_tshop_max;
                         var focal_length_tshop_min = focalData[j].focal_length_tshop_min;
-                         var lensDivNew2 = $("<div class='row ml-2'><div class='col-md-3'><div class='form-group flex'><input type='number' id='t-shop-min9'value='"+focal_length+"' class='form-control mx-sm-3 width-50'><label class='width-50'>mm </label></div></div> <div class='col-md-3'><div class='form-group flex'><label class='width-50 font-weight-bold'>[LiD]</label><input type='number' id='t-shop-max9' value='"+focal_length_value+"' class='form-control mx-sm-3 width-50'></div> </div> <div class='col-md-3'><div class='form-group flex'><label class='width-50'>Max Value </label><input type='number' id='t-shop-min9' class='form-control  mx-sm-3 width-50' value='"+focal_length_tshop_max+"'></div></div><div class='col-md-3'><div class='form-group flex'><label class='width-50'>Min Value </label><input type='number' value='"+focal_length_tshop_min+"' id='t-shop-min9' class='form-control mx-sm-3 width-50'></div></div></div>");
+                         var lensDivNew2 = $("<div class='row lenDatarow ml-2'><div class='col-md-3'><div class='form-group flex'><input type='number' id='focal_length"+focal_length_id+"'value='"+focal_length+"' class='form-control mx-sm-3 width-50'><label class='width-50'>mm </label></div></div> <div class='col-md-3'><div class='form-group flex'><label class='width-50 font-weight-bold'>[LiD]</label><input type='number' id='focal_length_value"+focal_length_id+"' value='"+focal_length_value+"' class='form-control mx-sm-3 width-50'></div> </div> <div class='col-md-3'><div class='form-group flex'><label class='width-50'>Max Value </label><input type='number' id='focal_length_tshop_max"+focal_length_id+"' class='form-control  mx-sm-3 width-50' value='"+focal_length_tshop_max+"'></div></div><div class='col-md-3'><div class='form-group flex'><label class='width-50'>Min Value </label><input type='number' value='"+focal_length_tshop_min+"' id='focal_length_tshop_min"+focal_length_id+"' class='form-control mx-sm-3 width-50'></div></div></div>");
                      $('#showModelLensValueData').append(lensDivNew2);
                     }
 
                    }
                 }
             });
-        });
+        }); 
     });
 
-
+// EDIT LENS DATA
   $('document').ready(function(){
         $('#lenSave').click(function(){
-            var camera_categorie = $("#camera_categorie").val();
-            var camera_manufacturer = $("#camera_manufacturer").val();
-            var camera_name  = $("#camera_name").val();
-            var id = id;
-           console.log(cameraEditAllDataArray);
-            var count = $('#showModelWidthData .row').length;
-    
-                   cameraEditObjectList = [];
-                   if(count > 0){
-                     for( var j = 0; j<count; j++){
-                        
-                        cameraId = cameraEditAllData[j]['id'];
-                        var camera_value = $('#camera_value'+ cameraId).val(); 
-                        var edit_tshop_min = $('#edit_tshopmin'+ cameraId).val(); 
-                        cameraEditObject = {
-                            'id':tshopId,
-                            'focal_length_tshop_max':edit_tshop_max,
-                            'focal_length_tshop_min':edit_tshop_min
-                        }
-                        cameraEditObjectList.push(tshopEditObject)
-                     }
-            }
-
+            
+            var manufactures = $("#manufactures").val();
+            var series = $("#series").val();
+            var id = lensDataId[0].id;
+            lenEditObjectList = [];
+            var editcount = $('#showModelLensValueData .lenDatarow').length;
+              if(editcount > 0){
+                    focalData = focalData;
+                    for(var k = 0; k < focalData.length;k++){
+                      focal_id = focalData[k].id;
+                      var focal_length = $('#focal_length'+ focal_id).val(); 
+                      var focal_length_value = $('#focal_length_value'+ focal_id).val(); 
+                      var focal_length_tshop_max = $('#focal_length_tshop_max'+ focal_id).val(); 
+                      var focal_length_tshop_min = $('#focal_length_tshop_min'+ focal_id).val(); 
+                      lensEditObject = {
+                          'id':focal_id,
+                          'focal_length':focal_length,
+                          'focal_length_value':focal_length_value,
+                          'focal_length_tshop_max':focal_length_tshop_max,
+                          'focal_length_tshop_min':focal_length_tshop_min 
+                      }
+                    lenEditObjectList.push(lensEditObject);
+                   
+                    }
+                }
+                 
             $.ajax({
-               type : "PUT",
-               data : "camera_categorie=" + camera_categorie + "&_token= "+ token + "&camera_manufacturer=" + camera_manufacturer + "&camera_name=" + camera_name + "&camera_id=" + camera_id +"&sensor_id=" + sensor_id + "&height=" + height + "&diameter=" + diameter,
-               url:"/smartfinder-plus/" + sensor_id,
+               type : "post",
+               data : "lenEditObjectList=" + JSON.stringify(lenEditObjectList) + "&manufactures=" + manufactures + "&series=" + series + "&id=" + id,
+               url:"/smartfinder-plus-update-lens/" + id,
                 success:function(data){
                     console.log(data);
-                    sensorId = data.id;
-                    var categorie_id = data.categorie_id
+                 
                }
             });
         });
     });
   
-});
 </script>
 @endsection

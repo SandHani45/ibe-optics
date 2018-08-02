@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\apiversion;
 use App\camera;
 use App\manufacturer;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class ManufacturerController extends Controller
     
    public function addManufacturer(Request $request)
 	{
+		apiversion::find(1)->increment('version');
 		$manufacturer = new manufacturer;
 		$manufacturer->categorie_id = $request->categorie_id;
 	    $manufacturer->name = $request->manufacturer;
@@ -24,6 +26,7 @@ class ManufacturerController extends Controller
 
 	 public function Edit(Request $request, $id)
 	{
+		apiversion::find(1)->increment('version');
 		$manufacturer = manufacturer::find($id);
 		$manufacturer->name = $request->manufacturer;
 	    $manufacturer->update();

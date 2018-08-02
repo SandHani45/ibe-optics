@@ -10,16 +10,15 @@ class camera extends Model
 
     public function categories()
     {
-        return $this->belongsTo('App\categorie','id');
+        return $this->belongsTo('App\categorie','categorie_id', 'id');
     } 
     public function manufacturers()
     {
-        return $this->belongsTo('App\manufacturer','id');
+        return $this->belongsTo('App\manufacturer','manufacturer_id', 'id');
     }
 
     public function sensors()
     {
-    	return $this->hasMany('App\Sensor','camera_id');
+    	return $this->hasMany('App\Sensor','camera_id', 'id');
     }
-
 }

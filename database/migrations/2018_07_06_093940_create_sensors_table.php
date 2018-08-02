@@ -18,10 +18,11 @@ class CreateSensorsTable extends Migration
             $table->integer('categorie_id');
             $table->integer('manufacturer_id');
             $table->integer('camera_id');
-            $table->integer('value')->nullable();
-            $table->integer('width')->nullable();
-            $table->integer('height')->nullable();
-            $table->integer('diameter')->nullable();
+            $table->float('value')->nullable();
+            $table->float('width')->nullable();
+            $table->float('height')->nullable();
+            $table->float('res_width')->nullable();
+            $table->float('res_height')->nullable();
             $table->timestamps();
         });
     }
